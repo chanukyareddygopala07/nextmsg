@@ -1,0 +1,159 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  profile       Profile?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+model Profile {
+  id             String         @id @default(cuid())
+  userId         String         @unique
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  textingProfile TextingProfile?
+  conversations  Conversation[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@map("profiles")
+}
+
+model TextingProfile {
+  id                   String   @id @default(cuid())
+  profileId            String   @unique
+  profile              Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  messageLength        String   @default("medium")
+  capitalization       String   @default("mixed")
+  punctuation          String   @default("moderate")
+  emojiFrequency       String   @default("moderate")
+  favoriteEmojis       String[]
+  humor                String   @default("moderate")
+  flirting             String   @default("moderate")
+  slang                String   @default("moderate")
+  abbreviations        String   @default("moderate")
+  directness           String   @default("moderate")
+  questionFrequency    String   @default("moderate")
+  energy               String   @default("casual")
+  sarcasm              String   @default("low")
+  useOfLowercase       String   @default("sometimes")
+  typicalOpenings      String[]
+  typicalClosings      String[]
+  oneLinerTendency     String   @default("moderate")
+  conversationalEnergy String   @default("moderate")
+  onboardingExamples   String[]
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@map("texting_profiles")
+}
+
+model Conversation {
+  id            String             @id @default(cuid())
+  profileId     String
+  profile       Profile            @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  platform      String?
+  goal          String?
+  inputType     String             @default("text")
+  stage         String?
+  engagement    Float?
+  flirting      Float?
+  humor         Float?
+  reciprocity   Float?
+  conversationHealth Float?
+  messages      ConversationMessage[]
+  replies       GeneratedReply[]
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+
+  @@map("conversations")
+}
+
+model ConversationMessage {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender         String
+  text           String
+  ordering       Int
+  createdAt      DateTime     @default(now())
+
+  @@map("conversation_messages")
+}
+
+model GeneratedReply {
+  id             String             @id @default(cuid())
+  conversationId String
+  conversation   Conversation       @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  text           String
+  strategy       String
+  isBestMatch    Boolean            @default(false)
+  selected       Boolean            @default(false)
+  feedback       ReplyFeedback[]
+  createdAt      DateTime           @default(now())
+
+  @@map("generated_replies")
+}
+
+model ReplyFeedback {
+  id            String        @id @default(cuid())
+  replyId       String
+  reply         GeneratedReply @relation(fields: [replyId], references: [id], onDelete: Cascade)
+  signal        String
+  createdAt     DateTime      @default(now())
+
+  @@map("reply_feedback")
+}

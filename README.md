@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NEXTMSG
 
-## Getting Started
+> Never wonder what to say next.
 
-First, run the development server:
+AI conversation copilot that writes replies like you would.
+
+## Setup
 
 ```bash
+# Install dependencies
+npm install
+
+# Set up database
+npx prisma generate
+npx prisma db push
+
+# Start dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Copy `.env.example` to `.env.local` and fill in:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `DATABASE_URL` — PostgreSQL connection string
+- `NEXTAUTH_SECRET` — Random secret for NextAuth
+- `GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET` — GitHub OAuth
+- `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` — Google OAuth
+- `OPENROUTER_API_KEY` — OpenRouter API key
+- `OPENROUTER_MODEL` — Model to use (default: `google/gemma-4-26b-a4b-it:free`)
 
-## Learn More
+## Architecture
 
-To learn more about Next.js, take a look at the following resources:
+- **Next.js App Router** — Full-stack framework
+- **Prisma** — Database ORM
+- **NextAuth** — Authentication
+- **OpenRouter** — AI provider (supports multiple models)
+- **Tailwind CSS** — Styling
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## AI Pipeline
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Screenshot/text input → Normalized conversation
+2. Conversation analysis → Stage, engagement, signals
+3. Reply generation → 6 candidate strategies
+4. Humanization → Remove AI-like patterns
+5. Ranking → Best match + alternatives
 
-## Deploy on Vercel
+## API Routes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+POST /api/analyze/text         — Parse text conversation
+POST /api/analyze/screenshot   — Extract from screenshot
+POST /api/replies/generate     — Generate replies
+POST /api/replies/feedback     — Record user feedback
+GET  /api/style/profile        — Get style profile
+POST /api/style/profile        — Analyze style from examples
+GET  /api/conversations        — List conversations
+DELETE /api/conversations/:id  — Delete conversation
+GET  /api/profile              — Get user profile
+PATCH /api/profile             — Update user profile
+```
