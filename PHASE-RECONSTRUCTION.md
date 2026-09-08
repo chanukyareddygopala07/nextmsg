@@ -197,7 +197,67 @@ Learn and apply the user's communication preferences across conversations. Extra
 
 ---
 
-<!-- Phase 4 section will be added in next commit -->
+## Phase 4 — Draft Analysis & Message Improvement
+
+**Purpose:**
+Analyze user draft messages against conversation context, predict communication impact, improve messages without changing meaning, transform tone, validate quality, preserve factual accuracy, and gate messages before sending.
+
+**Major Functionality:**
+- Draft analysis engine with deterministic checks and AI-powered semantic analysis
+- Impact prediction combining deterministic risk logic with AI outcome interpretation
+- Message improvement engine — rewrite without changing meaning (Phase 4 Step 3)
+- Tone transformation — change how a message sounds (Phase 4 Step 4)
+- Pre-send quality gate — 18 deterministic checks before sending (Phase 4 Step 6)
+- Quality validator with 9 validation dimensions
+- Factual preservation engine — lock meaning during rewrites
+- Draft types and impact types
+
+**Explicit Phase Labels in Source:**
+- `src/lib/ai/message-improver.ts` line 3: "Phase 4 Step 3: Context-Aware Communication Rewriting"
+- `src/lib/ai/tone-transformer.ts` line 3: "Phase 4 Step 4: Change HOW a message sounds without changing WHAT the user means"
+- `src/lib/ai/pre-send-gate.ts` line 3: "Phase 4 Step 6: Final quality gate before a user sends a message"
+- `src/lib/ai/preservation.ts` line 4: "Critical for Phase 4 Step 3: Improve My Message"
+
+**Representative Files:**
+- `src/lib/ai/draft-analysis.ts` (976 lines) — Draft Analysis Engine
+- `src/lib/ai/draft-types.ts` (273 lines) — DraftAnalysis, DraftCheck types
+- `src/lib/ai/impact-prediction.ts` (806 lines) — Communication Impact Prediction
+- `src/lib/ai/impact-types.ts` (195 lines) — ImpactSignal, ImpactPrediction types
+- `src/lib/ai/message-improver.ts` (643 lines) — Message Improvement Engine (Phase 4 Step 3)
+- `src/lib/ai/tone-transformer.ts` (1083 lines) — Tone Transformation Engine (Phase 4 Step 4)
+- `src/lib/ai/pre-send-gate.ts` (1619 lines) — Pre-Send Quality Gate (Phase 4 Step 6)
+- `src/lib/ai/pre-send-types.ts` (146 lines) — PreSendGateInput, CheckDimension types
+- `src/lib/ai/quality-validator.ts` (851 lines) — Response Quality Validation, 9 dimensions
+- `src/lib/ai/preservation.ts` (883 lines) — Factual Preservation Engine
+- `src/components/analyze/DraftAnalysisDisplay.tsx` — Draft analysis visualization
+- `src/components/analyze/DraftInput.tsx` — Draft input component
+- `src/components/analyze/ImpactDisplay.tsx` — Impact prediction display
+- `src/components/analyze/ImprovedReplyDisplay.tsx` — Improved reply display
+- `src/components/analyze/ImprovementModeSelector.tsx` — Improvement mode selection
+- `src/components/analyze/ToneTransformDisplay.tsx` — Tone transform display
+- `src/components/analyze/PreSendGateDisplay.tsx` — Pre-send gate display
+- `src/components/analyze/FactEditor.tsx` — Fact editor for preservation
+- `src/app/api/draft/analyze/route.ts` — Draft analysis endpoint
+- `src/app/api/draft/impact/route.ts` — Impact prediction endpoint
+- `src/app/api/draft/improve/route.ts` — Message improvement endpoint
+- `src/app/api/draft/tone/route.ts` — Tone transformation endpoint
+- `src/app/api/draft/pre-send/route.ts` — Pre-send gate endpoint
+- `tests/api/draft-analysis.test.ts` — Draft analysis tests
+- `tests/api/impact-prediction.test.ts` — Impact prediction tests
+- `tests/api/tone-transformer.test.ts` (1401 lines) — Tone transformer tests
+- `tests/api/pre-send-gate.test.ts` (1390 lines) — Pre-send gate tests
+- `tests/api/quality-validator.test.ts` (1001 lines) — Quality validator tests
+- `tests/api/preservation.test.ts` (694 lines) — Preservation tests
+
+**Evidence:**
+- All files first added in `cee28bd` (confirmed by `git log --all --diff-filter=A`)
+- Explicit `Phase 4 Step 3/4/6` labels in 4 source file headers
+- `PHASE7-STEP5-REPORT.md` traces the generate pipeline through draft analysis and impact prediction
+- `phase6-step7-cross-layer.test.ts` imports `validateCandidates` from `quality-validator`, `scoreAILikeness` from `humanizer`, `createPreservationContract` from `preservation`
+
+**Confidence:** VERY HIGH — explicit phase labels in source code
+
+---
 
 <!-- Phase 5 section will be added in next commit -->
 
