@@ -79,7 +79,74 @@ Core application scaffold — Next.js 14 (App Router), TypeScript, Tailwind CSS 
 
 ---
 
-<!-- Phase 2 section will be added in next commit -->
+## Phase 2 — Conversation Intelligence
+
+**Purpose:**
+Deep conversation understanding — resolving conversation state, selecting communication strategies, analyzing conflict dynamics, generating recovery guidance, building persuasion engines, coaching users on next moves, and managing multi-participant workspace state.
+
+**Major Functionality:**
+- ConversationState resolution from raw conversation data
+- Relationship type detection (manager, employee, professor, friend, etc.)
+- Communication strategy selection and ranking
+- Conflict analysis with multi-participant intelligence
+- Situation recovery for difficult conversations
+- Persuasion engine for persuasive communication
+- Conversation coaching with actionable next-move guidance
+- Workspace state management for multi-message composition
+- Participant intelligence and role detection
+- State resolver for deterministic state computation
+- Situation detector for context classification
+- Writing style profile inference
+
+**Representative Files:**
+- `src/lib/ai/conversation-state.ts` (150 lines) — ConversationState type definition
+- `src/lib/ai/intelligence.ts` (242 lines) — RelationshipType, CommunicationStrategy types
+- `src/lib/ai/strategy.ts` (822 lines) — Strategy Engine, produces ranked strategy recommendations
+- `src/lib/ai/conflict-analysis.ts` (1083 lines) — Conflict Intelligence, multi-participant conflict structure
+- `src/lib/ai/conflict-coach.ts` — Conflict Coaching, de-escalation guidance
+- `src/lib/ai/situation-recovery.ts` (906 lines) — Situation Recovery, structured recovery framework
+- `src/lib/ai/persuasion.ts` (359 lines) — Persuasion Engine, structured persuasive responses
+- `src/lib/ai/conversation-coach.ts` (953 lines) — Conversation Coaching, actionable next-move guidance
+- `src/lib/ai/workspace-state.ts` (515 lines) — Client-side workspace state management
+- `src/lib/ai/workspace-types.ts` — Workspace type definitions
+- `src/lib/ai/context.ts` — ConversationContext type
+- `src/lib/ai/state-resolver.ts` — Deterministic state computation
+- `src/lib/ai/detector.ts` — Situation detection
+- `src/lib/ai/personality.ts` — Writing style profile inference
+- `src/components/analyze/ConflictDisplay.tsx` — Conflict visualization
+- `src/components/analyze/ConversationCoachDisplay.tsx` — Coaching display
+- `src/components/analyze/RecoveryGuidance.tsx` — Recovery guidance display
+- `src/components/analyze/SituationDisplay.tsx` — Situation display
+- `src/components/analyze/ParticipantDisplay.tsx` — Participant display
+- `src/components/analyze/WorkspaceComposer.tsx` — Workspace composition
+- `src/components/analyze/WorkspaceConversation.tsx` — Workspace conversation view
+- `src/components/analyze/WorkspaceHeader.tsx` — Workspace header
+- `src/components/analyze/WorkspaceList.tsx` — Workspace list
+- `src/components/analyze/WorkspaceParticipantManager.tsx` — Participant management
+- `src/app/api/conversation/coach/route.ts` — Coaching endpoint
+- `src/app/api/conversations/[id]/participants/route.ts` — Participants endpoint
+- `src/app/api/conversations/[id]/participants/[participantId]/route.ts` — Participant detail
+- `src/app/api/conversations/[id]/messages/route.ts` — Messages endpoint
+- `src/app/api/conversations/[id]/messages/[messageId]/route.ts` — Message detail
+- `tests/api/conflict-analysis.test.ts` — Conflict analysis tests
+- `tests/api/conflict-coaching.test.ts` — Conflict coaching tests
+- `tests/api/conversation-coach.test.ts` — Conversation coach tests
+- `tests/api/situation-recovery.test.ts` — Situation recovery tests
+- `tests/api/situation-recovery-ui.test.ts` — Recovery UI tests
+- `tests/api/workspace-state.test.ts` — Workspace state tests
+- `tests/api/workspace-flows.test.ts` — Workspace flow tests
+- `tests/api/workspace-integration.test.ts` — Workspace integration tests
+- `tests/api/intelligence.test.ts` — Intelligence tests
+
+**Evidence:**
+- All files first added in `cee28bd` (confirmed by `git log --all --diff-filter=A`)
+- `PHASE7-STEP5-REPORT.md` traces the generate pipeline through `resolveConversationState()`, `selectStrategies()`, `detectModeFromState()`, confirming these modules were built before Phase 7
+- Test files `phase6-step7-cross-layer.test.ts` import from `state-resolver`, `strategy`, `quality-validator`, `conflict-analysis`, `situation-recovery`, `persuasion`, confirming these existed before Phase 6 evaluation
+- Source file headers reference "ConversationState" and "Strategy Engine" as established patterns
+
+**Confidence:** HIGH — code comments, test imports, and report evidence align
+
+---
 
 <!-- Phase 3 section will be added in next commit -->
 
