@@ -259,6 +259,45 @@ Analyze user draft messages against conversation context, predict communication 
 
 ---
 
-<!-- Phase 5 section will be added in next commit -->
+## Phase 5 — Universal Conversation Intelligence
+
+**Purpose:**
+Support multiple communication modes (casual, professional, flirty, assertive, etc.), integrate local AI providers (Ollama), detect language and script, and enable universal conversation support across languages and communication styles.
+
+**Major Functionality:**
+- Communication mode system with 8+ modes (casual, professional, flirty, assertive, empathetic, diplomatic, customer, apology)
+- Mode configuration with per-mode system instructions and constraints
+- Mode detection from conversation state and intelligence
+- Mode conflict detection and resolution
+- Ollama provider for local AI inference
+- Provider selection (OpenRouter, Ollama, xAI)
+- Language detection with script analysis
+- Language utilities for multi-language support
+- Mode observability events and logging
+- Mode benchmark loading and evaluation
+
+**Representative Files:**
+- `src/lib/ai/mode.ts` (14 lines) — Re-exports from mode-config
+- `src/lib/ai/mode-types.ts` (89 lines) — CommunicationMode, ModeConfig, ModeSelection, ModeRecommendation, ModeConflict types
+- `src/lib/ai/mode-config.ts` (750 lines) — MODE_CONFIGS, detectModeFromState, detectModeFromIntelligence, detectModeConflict, resolveEffectiveMode, isSafeModeInstruction
+- `src/lib/ai/ollama.ts` (367 lines) — OllamaProvider, OllamaProviderError, local AI inference
+- `src/lib/ai/language-detect.ts` (391 lines) — Language detection with script analysis
+- `src/lib/ai/language.ts` (143 lines) — Language utilities
+- `src/lib/ai/xai.ts` — xAI provider integration
+- `src/components/analyze/ModeSelector.tsx` — Mode selection UI
+- `tests/api/universal-modes.test.ts` (1408 lines) — Universal mode tests
+- `tests/api/universal-modes-extended.test.ts` (1823 lines) — Extended mode tests
+- `tests/api/language.test.ts` (375 lines) — Language detection tests
+- `tests/api/structured-outputs.test.ts` (316 lines) — Structured output tests
+
+**Evidence:**
+- All files first added in `cee28bd` (confirmed by `git log --all --diff-filter=A`)
+- `tests/api/phase6-universal-intelligence.test.ts` header: "Phase 6 Step 1 — Universal Conversation Intelligence gaps" — confirms these modules were built before Phase 6 evaluation
+- `phase6-universal-intelligence.test.ts` tests Ollama provider, mode config, provider selection — all Phase 5 functionality
+- `mode-config.ts` contains MODE_CONFIGS with 8 mode definitions, confirming the mode system was fully built
+
+**Confidence:** HIGH — test file headers and import evidence align
+
+---
 
 <!-- Phase 6 section will be added in next commit -->
