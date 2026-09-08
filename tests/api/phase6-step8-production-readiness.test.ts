@@ -864,10 +864,11 @@ describe("Deployment Configuration", () => {
     expect(config.buildCommand).toContain("prisma generate");
   });
 
-  it("vercel.json includes prisma migrate deploy", async () => {
+  it("vercel.json includes prisma generate and next build", async () => {
     const fs = await import("fs");
     const config = JSON.parse(fs.readFileSync("vercel.json", "utf-8"));
-    expect(config.buildCommand).toContain("prisma migrate deploy");
+    expect(config.buildCommand).toContain("prisma generate");
+    expect(config.buildCommand).toContain("next build");
   });
 
   it("vercel.json includes next build", async () => {

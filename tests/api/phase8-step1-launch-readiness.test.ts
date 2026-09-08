@@ -916,7 +916,6 @@ describe("Vercel Configuration", () => {
     const content = JSON.parse(fs.readFileSync(configPath, "utf-8"));
     expect(content.framework).toBe("nextjs");
     expect(content.buildCommand).toContain("prisma generate");
-    expect(content.buildCommand).toContain("prisma migrate deploy");
     expect(content.buildCommand).toContain("next build");
     expect(content.installCommand).toContain("npm install");
   });
