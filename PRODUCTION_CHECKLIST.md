@@ -13,11 +13,12 @@
 - [x] `NEXTMSG_LOG_LEVEL` — Logging level: `debug`, `info`, `warn`, `error` (Default: `info` in production)
 
 ### Database
-- [x] PostgreSQL database provisioned and accessible
-- [x] `prisma migrate deploy` — Initial migration created (20260908000000_init)
+- [x] PostgreSQL database provisioned (Supabase, PostgreSQL 17.6)
+- [x] `prisma migrate deploy` — Initial migration applied (20260908000000_init)
 - [x] `prisma generate` — Client generation in build command
-- [x] Database connection verified via health endpoint
+- [x] Database connection verified via health endpoint (connected, ~1.3s latency)
 - [x] All 20 tables with indexes and foreign keys
+- [x] Direct connection (port 5432) for Prisma compatibility
 
 ### Secrets
 - [x] All development secrets rotated if repo was ever shared
@@ -79,9 +80,10 @@
 ## Deployment
 
 ### Vercel
-- [x] `vercel.json` configured with `prisma generate && prisma migrate deploy && next build`
+- [x] `vercel.json` configured with `prisma generate && next build`
 - [x] `installCommand: npm install --legacy-peer-deps`
-- [x] Environment variables set in Vercel dashboard
+- [x] Environment variables set in Vercel dashboard (Production)
+- [x] `DATABASE_URL` points to hosted PostgreSQL (Supabase, direct connection)
 - [x] Domain configured and SSL active
 - [x] Preview deployments working
 
@@ -164,7 +166,7 @@
 
 ## Smoke Tests
 
-- [x] 168 launch-readiness tests passing
+- [x] 236 launch-readiness + production DB tests passing
 - [x] Environment validation (missing, invalid, weak secrets)
 - [x] Health endpoint (200/503 behavior)
 - [x] Authentication (auth module, middleware, ownership)
@@ -181,3 +183,10 @@
 - [x] Concurrency (rate limiter, circuit breaker, cache isolation)
 - [x] Cache isolation (request-scoped, no cross-request leakage)
 - [x] API route structure (24 routes verified)
+- [x] PostgreSQL integration (CRUD, transactions, isolation)
+- [x] Workspace isolation (User A cannot access User B data)
+- [x] Message ordering integrity
+- [x] Memory persistence with limit
+- [x] Preference persistence
+- [x] Feedback persistence
+- [x] Multilingual persistence (Telugu, Hindi, Tamil, Hinglish)

@@ -15,7 +15,8 @@
 5. Check Vercel deployment status in dashboard
 
 ### Resolution
-- **Database down**: Restart PostgreSQL, verify connection string, check Vercel database add-on
+- **Database down**: Restart PostgreSQL, verify connection string, check Supabase dashboard
+- **Database prepared statement error**: Ensure using direct connection (port 5432), not pooler (port 6543)
 - **Environment misconfiguration**: Set missing variables in Vercel dashboard, redeploy
 - **Circuit breaker open**: Wait for cooldown (60s), investigate provider issues
 - **Deployment failed**: Check Vercel build logs, fix errors, redeploy
@@ -68,13 +69,15 @@ vercel --prod
 - Health endpoint shows `database.status: "disconnected"`
 - Application logs show database connection errors
 - Prisma query errors
+- "prepared statement already exists" error
 
 ### Investigation
-1. Check PostgreSQL service status (Supabase dashboard, Neon dashboard, or RDS console)
-2. Verify `DATABASE_URL` connection string
-3. Check connection pool limits
+1. Check Supabase dashboard → Database → Health
+2. Verify `DATABASE_URL` uses direct connection (port 5432), not pooler (port 6543)
+3. Check connection pool limits in Supabase dashboard
 4. Check for long-running queries blocking connections
 5. Verify database server resources (CPU, memory, disk)
+6. Check Supabase status page: https://status.supabase.com
 
 ### Resolution
 - **Connection refused**: Restart PostgreSQL, check firewall rules
