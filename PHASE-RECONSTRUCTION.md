@@ -300,4 +300,94 @@ Support multiple communication modes (casual, professional, flirty, assertive, e
 
 ---
 
-<!-- Phase 6 section will be added in next commit -->
+## Phase 6 — Evaluation & Quality Assurance
+
+**Purpose:**
+Build a comprehensive evaluation framework with benchmark datasets, multi-dimensional evaluators, regression testing, quality metrics, and production-readiness validation. Ensure AI-generated responses meet quality standards across tone, context, safety, semantic accuracy, and factual preservation.
+
+**Major Functionality:**
+- Evaluation framework with runner, metrics, thresholds, and reporting
+- Benchmark datasets: tone, context, semantic, mode, golden, real-world (335+ cases)
+- 12+ evaluators: tone, context, semantic, safety, preservation, recovery, conflict, negotiation, multilingual, personalization, pre-send, mode
+- Tone accuracy optimization (Phase 6 Step 6)
+- Cross-layer regression testing (Phase 6 Step 7)
+- E2E integration testing (Phase 6 Step 7)
+- Workspace isolation testing (Phase 6 Step 7)
+- Prompt injection resistance testing (Phase 6 Step 7)
+- Multilingual evaluation (Phase 6 Step 7)
+- Production readiness validation (Phase 6 Step 8)
+- Error handling and retry logic
+- Request caching
+- Structured output schemas
+- Prompt builder system
+- Intelligence service layer
+
+**Representative Files — Evaluation Framework:**
+- `src/lib/evaluation/runner.ts` — Evaluation runner
+- `src/lib/evaluation/metrics.ts` — Metrics computation
+- `src/lib/evaluation/thresholds.ts` — Quality thresholds
+- `src/lib/evaluation/reports.ts` — Report generation
+- `src/lib/evaluation/regression.ts` — Regression detection
+- `src/lib/evaluation/types.ts` — Evaluation types
+- `src/lib/evaluation/index.ts` — Framework exports
+
+**Representative Files — Benchmark Datasets:**
+- `src/lib/evaluation/datasets/tone-benchmark.ts` — Tone benchmark
+- `src/lib/evaluation/datasets/context-benchmark.ts` — Context benchmark
+- `src/lib/evaluation/datasets/semantic-benchmark.ts` — Semantic benchmark
+- `src/lib/evaluation/datasets/mode-benchmark.ts` — Mode benchmark
+- `src/lib/evaluation/datasets/golden-benchmark.ts` — Golden benchmark
+- `src/lib/evaluation/datasets/real-world-benchmark.ts` — Real-world benchmark (335+ cases)
+- `src/lib/evaluation/datasets/loader.ts` — Dataset loader
+
+**Representative Files — Evaluators:**
+- `src/lib/evaluation/evaluators/tone.ts` — Tone evaluator
+- `src/lib/evaluation/evaluators/context.ts` — Context evaluator
+- `src/lib/evaluation/evaluators/index.ts` — Evaluator registry
+- `src/lib/evaluation/evaluators/conflict.ts` — Conflict evaluator
+- `src/lib/evaluation/evaluators/recovery.ts` — Recovery evaluator
+- `src/lib/evaluation/evaluators/negotiation.ts` — Negotiation evaluator
+- `src/lib/evaluation/evaluators/multilingual.ts` — Multilingual evaluator
+- `src/lib/evaluation/evaluators/personalization.ts` — Personalization evaluator
+- `src/lib/evaluation/evaluators/pre-send.ts` — Pre-send evaluator
+- `src/lib/evaluation/evaluators/preservation.ts` — Preservation evaluator
+- `src/lib/evaluation/evaluators/mode.ts` — Mode evaluator
+- `src/lib/evaluation/evaluators/real-world.ts` — Real-world evaluator
+
+**Representative Files — Infrastructure:**
+- `src/lib/ai/errors.ts` (156 lines) — Error handling
+- `src/lib/ai/retry.ts` — Retry logic
+- `src/lib/ai/request-cache.ts` — Request caching
+- `src/lib/ai/schemas.ts` — Structured output schemas
+- `src/lib/ai/prompt-builder.ts` (215 lines) — Prompt builder system
+- `src/lib/ai/prompts/system.ts` — System prompts
+- `src/lib/ai/prompts/intelligence.ts` — Intelligence prompts
+- `src/lib/ai/intelligence-service.ts` (58 lines) — Intelligence service layer
+
+**Representative Files — Phase 6 Tests:**
+- `tests/api/phase6-tone-context.test.ts` (2209 lines) — Tone accuracy & context fit
+- `tests/api/phase6-universal-intelligence.test.ts` (413 lines) — Universal intelligence gaps
+- `tests/api/phase6-step6-tone-accuracy.test.ts` (760 lines) — Tone accuracy final push
+- `tests/api/phase6-step7-cross-layer.test.ts` (439 lines) — Cross-layer regression
+- `tests/api/phase6-step7-e2e-integration.test.ts` (610 lines) — E2E integration
+- `tests/api/phase6-step7-fallback.test.ts` (317 lines) — Fallback behavior
+- `tests/api/phase6-step7-instruction-precedence.test.ts` (369 lines) — Instruction precedence
+- `tests/api/phase6-step7-multilingual.test.ts` (317 lines) — Multilingual support
+- `tests/api/phase6-step7-pre-send-gate.test.ts` (319 lines) — Pre-send gate
+- `tests/api/phase6-step7-prompt-injection.test.ts` (256 lines) — Prompt injection resistance
+- `tests/api/phase6-step7-semantic-regression.test.ts` (313 lines) — Semantic regression
+- `tests/api/phase6-step7-workspace-isolation.test.ts` (364 lines) — Workspace isolation
+- `tests/api/phase6-step8-production-readiness.test.ts` (1119 lines) — Production readiness
+
+**Evidence:**
+- All files first added in `cee28bd` (confirmed by `git log --all --diff-filter=A`)
+- 12 test files with explicit `phase6-*` prefix in their names
+- Test file headers reference specific Phase 6 steps (Step 1, Step 6, Step 7, Step 8)
+- `PHASE7-STEP2-REPORT.md` references "335-case real-world benchmark" matching `real-world-benchmark.ts`
+- `PHASE7-STEP5-REPORT.md` traces the evaluation pipeline through the runner, metrics, and evaluators
+
+**Confidence:** VERY HIGH — explicit phase labels in test file names and headers
+
+---
+
+*This document was reconstructed from repository evidence. It is not an original historical document.*
