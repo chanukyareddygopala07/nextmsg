@@ -1,4 +1,4 @@
-import type { AIProvider, AIMessage, AIVisionMessage } from "./provider";
+import type { AIProvider, AIMessage, AIVisionMessage, StructuredOutputConfig } from "./provider";
 
 const OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions";
 
@@ -223,5 +223,25 @@ export class OpenRouterProvider implements AIProvider {
     }
 
     throw lastError || new ProviderError("PROVIDER_UNKNOWN_ERROR", "All text models failed");
+  }
+
+  async chatStructured(
+    messages: AIMessage[],
+    structuredOutput: StructuredOutputConfig,
+    options: { temperature?: number; maxTokens?: number } = {}
+  ): Promise<string> {
+    return this.singleRequest(this.model, {
+      messages,
+      temperature: options.temperature ?? 0.3,
+      max_tokens: options.maxTokens ?? 1024,
+      response_format: {
+        type: "json_schema",
+        json_schema: {
+          name: structuredOutput.name,
+          strict: true,
+          schema: structuredOutput.schema,
+        },
+      },
+    });
   }
 }

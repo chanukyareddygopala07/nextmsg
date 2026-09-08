@@ -6,6 +6,7 @@ function createMockProvider(responseContent: string): AIProvider {
   return {
     chat: vi.fn().mockResolvedValue(responseContent),
     chatVision: vi.fn().mockResolvedValue(responseContent),
+    chatStructured: vi.fn().mockResolvedValue(responseContent),
   };
 }
 
@@ -32,27 +33,7 @@ describe("extractFromScreenshot", () => {
     expect(result.confidence).toBe(0.95);
   });
 
-  it("handles markdown-fenced JSON", async () => {
-    const mockResponse = '```json\n{"messages":[{"sender":"me","text":"hello"}]}\n```';
-
-    const provider = createMockProvider(mockResponse);
-    const result = await extractFromScreenshot(provider, "dGVzdA==", "image/png");
-
-    expect(result.messages).toHaveLength(1);
-    expect(result.messages[0].text).toBe("hello");
-  });
-
-  it("handles surrounding text around JSON", async () => {
-    const mockResponse = 'Here is the extracted conversation:\n{"messages":[{"sender":"them","text":"hi"}]}';
-
-    const provider = createMockProvider(mockResponse);
-    const result = await extractFromScreenshot(provider, "dGVzdA==", "image/png");
-
-    expect(result.messages).toHaveLength(1);
-    expect(result.messages[0].text).toBe("hi");
-  });
-
-  it("returns empty messages for invalid JSON", async () => {
+  it("returns error for invalid JSON", async () => {
     const provider = createMockProvider("This is not JSON at all");
     const result = await extractFromScreenshot(provider, "dGVzdA==", "image/png");
 
@@ -97,6 +78,7 @@ describe("extractFromScreenshot", () => {
   it("handles provider errors gracefully", async () => {
     const provider = createMockProvider("");
     provider.chatVision = vi.fn().mockRejectedValue(new Error("Network error"));
+    provider.chatStructured = vi.fn().mockRejectedValue(new Error("Network error"));
     const result = await extractFromScreenshot(provider, "dGVzdA==", "image/png");
 
     expect(result.messages).toHaveLength(0);
@@ -114,5 +96,19 @@ describe("extractFromScreenshot", () => {
 
     expect(result.platform).toBeUndefined();
     expect(result.messages).toHaveLength(1);
+  });
+
+  it("uses structured output via chatStructured", async () => {
+    const mockResponse = JSON.stringify({
+      platform: "whatsapp",
+      messages: [{ sender: "them", text: "yo" }],
+      confidence: 0.8,
+    });
+
+    const provider = createMockProvider(mockResponse);
+    await extractFromScreenshot(provider, "dGVzdA==", "image/png");
+
+    expect(provider.chatStructured).toHaveBeenCalled();
+    expect(provider.chatVision).not.toHaveBeenCalled();
   });
 });

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Button from "@/components/ui/Button";
+import FeedbackWidget from "./FeedbackWidget";
 
 interface ReplyCandidate {
   text: string;
@@ -13,6 +14,7 @@ interface ReplyDisplayProps {
   alternatives: ReplyCandidate[];
   onRegenerate?: () => void;
   onFeedback?: (signal: string) => void;
+  context?: string;
 }
 
 export default function ReplyDisplay({
@@ -20,6 +22,7 @@ export default function ReplyDisplay({
   alternatives,
   onRegenerate,
   onFeedback,
+  context,
 }: ReplyDisplayProps) {
   const [copied, setCopied] = useState<string | null>(null);
 
@@ -55,6 +58,11 @@ export default function ReplyDisplay({
             <Button variant="ghost" size="sm" onClick={onRegenerate}>
               Regenerate
             </Button>
+            <FeedbackWidget
+              strategy={bestMatch.strategy}
+              context={context}
+              onFeedback={onFeedback}
+            />
           </div>
         </div>
       </div>

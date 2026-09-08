@@ -1,43 +1,53 @@
-import { z } from "zod";
 import type { AIProvider } from "./provider";
-import { ProviderError, type ExtractionErrorCategory } from "./openrouter";
+import { XAIProviderError, type XAIErrorCategory } from "./xai";
+import {
+  ScreenshotExtractionSchema,
+  type ScreenshotExtraction,
+} from "./schemas";
 
-const ExtractionMessageSchema = z.object({
-  sender: z.enum(["me", "them", "unknown"]),
-  text: z.string().min(1),
-});
+const SCREENSHOT_EXTRACTION_OUTPUT_CONFIG = {
+  name: "screenshot_extraction",
+  schema: {
+    type: "object",
+    properties: {
+      platform: {
+        anyOf: [
+          { type: "string" },
+          { type: "null" },
+        ],
+      },
+      messages: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            sender: {
+              type: "string",
+              enum: ["me", "them", "unknown"],
+            },
+            text: { type: "string" },
+          },
+          required: ["sender", "text"],
+          additionalProperties: false,
+        },
+      },
+      confidence: { type: "number" },
+    },
+    required: ["messages"],
+    additionalProperties: false,
+  },
+};
 
-const ExtractionResultSchema = z.object({
-  platform: z.string().nullable().optional(),
-  messages: z.array(ExtractionMessageSchema),
-  confidence: z.number().min(0).max(1).optional(),
-});
-
-export type ExtractionResult = z.infer<typeof ExtractionResultSchema>;
-
-export interface ExtractionResponse extends ExtractionResult {
+export interface ExtractionResponse extends ScreenshotExtraction {
   error?: string;
-  errorCategory?: ExtractionErrorCategory;
+  errorCategory?: XAIErrorCategory;
 }
 
 const EXTRACTION_SYSTEM_PROMPT = `You are a conversation screenshot analyzer. Your ONLY job is to extract visible messages from this chat screenshot.
 
-Return ONLY valid JSON — no markdown fences, no explanation, no extra text.
-
-Required JSON structure:
-{
-  "platform": "instagram" | "whatsapp" | "discord" | "telegram" | "snapchat" | "dating" | "other" | null,
-  "messages": [
-    {
-      "sender": "me" | "them" | "unknown",
-      "text": "exact message content"
-    }
-  ],
-  "confidence": 0.0 to 1.0
-}
+Inspect the image carefully. Identify chat bubbles and their positions.
 
 Rules:
-- Inspect the image carefully. Identify chat bubbles and their positions.
 - Left-aligned bubbles = "them". Right-aligned bubbles = "me".
 - If sender cannot be determined, use "unknown". Do NOT guess.
 - Preserve the EXACT text including emojis, slang, abbreviations, typos.
@@ -46,36 +56,10 @@ Rules:
 - Do NOT include system messages, timestamps, read receipts, typing indicators, or UI chrome.
 - Do NOT include profile photos, navigation bars, status bars, or app headers.
 - Read the image as-is. If text is partially obscured, include what is readable.
-- If the image is not a chat screenshot, return {"platform": null, "messages": [], "confidence": 0.0}
+- If the image is not a chat screenshot, return an empty messages array with confidence 0.0.
 - If the image is blurry or unclear, still extract what you can and set confidence < 0.5`;
 
-const EXTRACTION_USER_PROMPT = "Extract every visible message from this conversation screenshot. Return only the JSON object — nothing else.";
-
-function stripMarkdownFences(raw: string): string {
-  let s = raw.trim();
-  if (s.startsWith("```")) {
-    s = s.replace(/^```(?:json)?\s*\n?/, "").replace(/\n?```\s*$/, "");
-  }
-  const firstBrace = s.indexOf("{");
-  const lastBrace = s.lastIndexOf("}");
-  if (firstBrace !== -1 && lastBrace > firstBrace) {
-    s = s.slice(firstBrace, lastBrace + 1);
-  }
-  return s.trim();
-}
-
-function normalizeMessages(raw: unknown): { sender: "me" | "them" | "unknown"; text: string }[] {
-  if (!Array.isArray(raw)) return [];
-  return raw
-    .filter((m): m is { sender: string; text: unknown } =>
-      typeof m === "object" && m !== null && "sender" in m && "text" in m
-    )
-    .map((m) => ({
-      sender: (["me", "them", "unknown"].includes(m.sender) ? m.sender : "unknown") as "me" | "them" | "unknown",
-      text: String(m.text).trim(),
-    }))
-    .filter((m) => m.text.length > 0);
-}
+const EXTRACTION_USER_PROMPT = "Extract every visible message from this conversation screenshot.";
 
 export async function extractFromScreenshot(
   provider: AIProvider,
@@ -96,7 +80,7 @@ export async function extractFromScreenshot(
   let rawResponse: string;
   try {
     const aiStart = Date.now();
-    rawResponse = await provider.chatVision(
+    rawResponse = await provider.chatStructured(
       [
         { role: "system", content: EXTRACTION_SYSTEM_PROMPT },
         {
@@ -113,6 +97,7 @@ export async function extractFromScreenshot(
           ],
         },
       ],
+      SCREENSHOT_EXTRACTION_OUTPUT_CONFIG,
       { temperature: 0.1, maxTokens: 2048 }
     );
     if (process.env.NEXTMSG_DEBUG_AI === "true") {
@@ -129,7 +114,7 @@ export async function extractFromScreenshot(
         error: err instanceof Error ? err.message : String(err),
       });
     }
-    if (err instanceof ProviderError) {
+    if (err instanceof XAIProviderError) {
       const userMessage = getProviderUserMessage(err.category);
       return { messages: [], confidence: 0, error: userMessage, errorCategory: err.category };
     }
@@ -142,11 +127,10 @@ export async function extractFromScreenshot(
   }
 
   const parseStart = Date.now();
-  const cleaned = stripMarkdownFences(rawResponse);
 
   let parsed: unknown;
   try {
-    parsed = JSON.parse(cleaned);
+    parsed = JSON.parse(rawResponse);
   } catch {
     return {
       messages: [],
@@ -156,8 +140,14 @@ export async function extractFromScreenshot(
     };
   }
 
-  const result = ExtractionResultSchema.safeParse(parsed);
+  const result = ScreenshotExtractionSchema.safeParse(parsed);
   if (!result.success) {
+    if (process.env.NEXTMSG_DEBUG_AI === "true") {
+      console.log("[NEXTMSG AI DEBUG] Screenshot extraction schema validation failed:", {
+        errors: result.error.issues,
+      });
+    }
+
     const rawMessages = (parsed && typeof parsed === "object" && "messages" in parsed)
       ? (parsed as Record<string, unknown>).messages
       : [];
@@ -193,7 +183,20 @@ export async function extractFromScreenshot(
   };
 }
 
-function getProviderUserMessage(category: ExtractionErrorCategory): string {
+function normalizeMessages(raw: unknown): { sender: "me" | "them" | "unknown"; text: string }[] {
+  if (!Array.isArray(raw)) return [];
+  return raw
+    .filter((m): m is { sender: string; text: unknown } =>
+      typeof m === "object" && m !== null && "sender" in m && "text" in m
+    )
+    .map((m) => ({
+      sender: (["me", "them", "unknown"].includes(m.sender) ? m.sender : "unknown") as "me" | "them" | "unknown",
+      text: String(m.text).trim(),
+    }))
+    .filter((m) => m.text.length > 0);
+}
+
+export function getProviderUserMessage(category: XAIErrorCategory): string {
   switch (category) {
     case "PROVIDER_AUTH_ERROR":
       return "The AI service is not configured correctly. Please check your settings.";

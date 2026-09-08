@@ -1,0 +1,2603 @@
+{
+  "datasetVersion": "1.0",
+  "totalCases": 50,
+  "passed": 63,
+  "failed": 37,
+  "warned": 55,
+  "skipped": 0,
+  "metrics": {
+    "classification": {
+      "accuracy": 0.9210836277974087,
+      "precision": 1,
+      "recall": 0.9152970922882427,
+      "f1": 0.9557755775577559,
+      "confusionMatrix": {
+        "truePositive": 724,
+        "falsePositive": 0,
+        "trueNegative": 58,
+        "falseNegative": 67
+      },
+      "support": 849
+    },
+    "preservation": {
+      "semanticPreservationRate": 0.96,
+      "negationPreservationRate": 0.92,
+      "factualPreservationRate": 0.94,
+      "boundaryPreservationRate": 1,
+      "positionPreservationRate": 1,
+      "abilityPreservationRate": 0.96,
+      "datePreservationRate": 0.98,
+      "numberPreservationRate": 0.98
+    },
+    "tone": {
+      "targetToneAccuracy": 0.32571428571428557,
+      "toneIntensityAccuracy": 0.4705178422700551,
+      "contextCompatibility": 0.95
+    },
+    "context": {
+      "contextFitRate": 0.48655462184873943,
+      "severeMismatchRate": 1,
+      "categoryBreakdown": {
+        "professional": 0.14539682539682539,
+        "academic": 0.14333333333333334,
+        "conflict": 0.15535714285714283,
+        "dating": 0.16527777777777777,
+        "recovery": 0,
+        "multilingual": 0,
+        "preservation": 0,
+        "golden": 0.1123015873015873,
+        "adversarial": 0.09399999999999999,
+        "negotiation": 0
+      }
+    },
+    "multilingual": {
+      "languagePreservationRate": 0,
+      "scriptPreservationRate": 0,
+      "codeMixPreservationRate": 1,
+      "semanticPreservationRate": 1
+    },
+    "risk": {
+      "criticalRiskRecall": 1,
+      "falsePositiveRate": 0,
+      "falseNegativeRate": 0
+    },
+    "personalization": {
+      "explicitOverrideAccuracy": 1,
+      "contextOverrideAccuracy": 1,
+      "preferenceRelevance": 1
+    },
+    "composite": {
+      "overall": 0.8634436974789916,
+      "safety": 1,
+      "semanticPreservation": 0.96,
+      "factualIntegrity": 0.94,
+      "context": 0.48655462184873943,
+      "goal": 1,
+      "tone": 0.32571428571428557,
+      "naturalness": 0.95,
+      "personalization": 1,
+      "weights": {
+        "safety": 0.2,
+        "semanticPreservation": 0.2,
+        "factualIntegrity": 0.15,
+        "context": 0.12,
+        "goal": 0.1,
+        "tone": 0.08,
+        "naturalness": 0.08,
+        "personalization": 0.07
+      }
+    }
+  },
+  "categories": {
+    "professional": {
+      "total": 30,
+      "passed": 12,
+      "failed": 2,
+      "metrics": {
+        "classification": {
+          "accuracy": 0.9877300613496932,
+          "precision": 1,
+          "recall": 0.9863945578231292,
+          "f1": 0.9931506849315068,
+          "confusionMatrix": {
+            "truePositive": 145,
+            "falsePositive": 0,
+            "trueNegative": 16,
+            "falseNegative": 2
+          },
+          "support": 163
+        },
+        "preservation": {
+          "semanticPreservationRate": 1,
+          "negationPreservationRate": 1,
+          "factualPreservationRate": 1,
+          "boundaryPreservationRate": 1,
+          "positionPreservationRate": 1,
+          "abilityPreservationRate": 1,
+          "datePreservationRate": 1,
+          "numberPreservationRate": 1
+        },
+        "tone": {
+          "targetToneAccuracy": 0.30000000000000004,
+          "toneIntensityAccuracy": 0.4697305438069751,
+          "contextCompatibility": 1
+        },
+        "context": {
+          "contextFitRate": 0.43619047619047613,
+          "severeMismatchRate": 0,
+          "categoryBreakdown": {
+            "professional": 0.14539682539682539
+          }
+        },
+        "multilingual": {
+          "languagePreservationRate": 1,
+          "scriptPreservationRate": 1,
+          "codeMixPreservationRate": 1,
+          "semanticPreservationRate": 1
+        },
+        "risk": {
+          "criticalRiskRecall": 1,
+          "falsePositiveRate": 0,
+          "falseNegativeRate": 0
+        },
+        "personalization": {
+          "explicitOverrideAccuracy": 1,
+          "contextOverrideAccuracy": 1,
+          "preferenceRelevance": 1
+        },
+        "composite": {
+          "overall": 0.8763428571428571,
+          "safety": 1,
+          "semanticPreservation": 1,
+          "factualIntegrity": 1,
+          "context": 0.43619047619047613,
+          "goal": 1,
+          "tone": 0.30000000000000004,
+          "naturalness": 1,
+          "personalization": 1,
+          "weights": {
+            "safety": 0.2,
+            "semanticPreservation": 0.2,
+            "factualIntegrity": 0.15,
+            "context": 0.12,
+            "goal": 0.1,
+            "tone": 0.08,
+            "naturalness": 0.08,
+            "personalization": 0.07
+          }
+        }
+      }
+    },
+    "academic": {
+      "total": 15,
+      "passed": 5,
+      "failed": 3,
+      "metrics": {
+        "classification": {
+          "accuracy": 0.9512195121951219,
+          "precision": 1,
+          "recall": 0.9459459459459459,
+          "f1": 0.9722222222222222,
+          "confusionMatrix": {
+            "truePositive": 70,
+            "falsePositive": 0,
+            "trueNegative": 8,
+            "falseNegative": 4
+          },
+          "support": 82
+        },
+        "preservation": {
+          "semanticPreservationRate": 1,
+          "negationPreservationRate": 1,
+          "factualPreservationRate": 1,
+          "boundaryPreservationRate": 1,
+          "positionPreservationRate": 1,
+          "abilityPreservationRate": 1,
+          "datePreservationRate": 1,
+          "numberPreservationRate": 1
+        },
+        "tone": {
+          "targetToneAccuracy": 0.27999999999999997,
+          "toneIntensityAccuracy": 0.461094010767585,
+          "contextCompatibility": 0.6
+        },
+        "context": {
+          "contextFitRate": 0.43,
+          "severeMismatchRate": 0,
+          "categoryBreakdown": {
+            "academic": 0.14333333333333334
+          }
+        },
+        "multilingual": {
+          "languagePreservationRate": 1,
+          "scriptPreservationRate": 1,
+          "codeMixPreservationRate": 1,
+          "semanticPreservationRate": 1
+        },
+        "risk": {
+          "criticalRiskRecall": 1,
+          "falsePositiveRate": 0,
+          "falseNegativeRate": 0
+        },
+        "personalization": {
+          "explicitOverrideAccuracy": 1,
+          "contextOverrideAccuracy": 1,
+          "preferenceRelevance": 1
+        },
+        "composite": {
+          "overall": 0.8420000000000001,
+          "safety": 1,
+          "semanticPreservation": 1,
+          "factualIntegrity": 1,
+          "context": 0.43,
+          "goal": 1,
+          "tone": 0.27999999999999997,
+          "naturalness": 0.6,
+          "personalization": 1,
+          "weights": {
+            "safety": 0.2,
+            "semanticPreservation": 0.2,
+            "factualIntegrity": 0.15,
+            "context": 0.12,
+            "goal": 0.1,
+            "tone": 0.08,
+            "naturalness": 0.08,
+            "personalization": 0.07
+          }
+        }
+      }
+    },
+    "conflict": {
+      "total": 28,
+      "passed": 17,
+      "failed": 6,
+      "metrics": {
+        "classification": {
+          "accuracy": 0.9508196721311475,
+          "precision": 1,
+          "recall": 0.9482758620689655,
+          "f1": 0.9734513274336283,
+          "confusionMatrix": {
+            "truePositive": 110,
+            "falsePositive": 0,
+            "trueNegative": 6,
+            "falseNegative": 6
+          },
+          "support": 122
+        },
+        "preservation": {
+          "semanticPreservationRate": 1,
+          "negationPreservationRate": 1,
+          "factualPreservationRate": 1,
+          "boundaryPreservationRate": 1,
+          "positionPreservationRate": 1,
+          "abilityPreservationRate": 1,
+          "datePreservationRate": 1,
+          "numberPreservationRate": 1
+        },
+        "tone": {
+          "targetToneAccuracy": 0.4428571428571429,
+          "toneIntensityAccuracy": 0.5598442181197018,
+          "contextCompatibility": 1
+        },
+        "context": {
+          "contextFitRate": 0.6214285714285713,
+          "severeMismatchRate": 1,
+          "categoryBreakdown": {
+            "conflict": 0.15535714285714283
+          }
+        },
+        "multilingual": {
+          "languagePreservationRate": 1,
+          "scriptPreservationRate": 1,
+          "codeMixPreservationRate": 1,
+          "semanticPreservationRate": 1
+        },
+        "risk": {
+          "criticalRiskRecall": 1,
+          "falsePositiveRate": 0,
+          "falseNegativeRate": 0
+        },
+        "personalization": {
+          "explicitOverrideAccuracy": 1,
+          "contextOverrideAccuracy": 1,
+          "preferenceRelevance": 1
+        },
+        "composite": {
+          "overall": 0.9099999999999999,
+          "safety": 1,
+          "semanticPreservation": 1,
+          "factualIntegrity": 1,
+          "context": 0.6214285714285713,
+          "goal": 1,
+          "tone": 0.4428571428571429,
+          "naturalness": 1,
+          "personalization": 1,
+          "weights": {
+            "safety": 0.2,
+            "semanticPreservation": 0.2,
+            "factualIntegrity": 0.15,
+            "context": 0.12,
+            "goal": 0.1,
+            "tone": 0.08,
+            "naturalness": 0.08,
+            "personalization": 0.07
+          }
+        }
+      }
+    },
+    "dating": {
+      "total": 12,
+      "passed": 5,
+      "failed": 0,
+      "metrics": {
+        "classification": {
+          "accuracy": 1,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "confusionMatrix": {
+            "truePositive": 53,
+            "falsePositive": 0,
+            "trueNegative": 7,
+            "falseNegative": 0
+          },
+          "support": 60
+        },
+        "preservation": {
+          "semanticPreservationRate": 1,
+          "negationPreservationRate": 1,
+          "factualPreservationRate": 1,
+          "boundaryPreservationRate": 1,
+          "positionPreservationRate": 1,
+          "abilityPreservationRate": 1,
+          "datePreservationRate": 1,
+          "numberPreservationRate": 1
+        },
+        "tone": {
+          "targetToneAccuracy": 0.30000000000000004,
+          "toneIntensityAccuracy": 0.5292535625036333,
+          "contextCompatibility": 1
+        },
+        "context": {
+          "contextFitRate": 0.49583333333333335,
+          "severeMismatchRate": 0,
+          "categoryBreakdown": {
+            "dating": 0.16527777777777777
+          }
+        },
+        "multilingual": {
+          "languagePreservationRate": 1,
+          "scriptPreservationRate": 1,
+          "codeMixPreservationRate": 1,
+          "semanticPreservationRate": 1
+        },
+        "risk": {
+          "criticalRiskRecall": 1,
+          "falsePositiveRate": 0,
+          "falseNegativeRate": 0
+        },
+        "personalization": {
+          "explicitOverrideAccuracy": 1,
+          "contextOverrideAccuracy": 1,
+          "preferenceRelevance": 1
+        },
+        "composite": {
+          "overall": 0.8835,
+          "safety": 1,
+          "semanticPreservation": 1,
+          "factualIntegrity": 1,
+          "context": 0.49583333333333335,
+          "goal": 1,
+          "tone": 0.30000000000000004,
+          "naturalness": 1,
+          "personalization": 1,
+          "weights": {
+            "safety": 0.2,
+            "semanticPreservation": 0.2,
+            "factualIntegrity": 0.15,
+            "context": 0.12,
+            "goal": 0.1,
+            "tone": 0.08,
+            "naturalness": 0.08,
+            "personalization": 0.07
+          }
+        }
+      }
+    },
+    "recovery": {
+      "total": 12,
+      "passed": 5,
+      "failed": 0,
+      "metrics": {
+        "classification": {
+          "accuracy": 1,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "confusionMatrix": {
+            "truePositive": 60,
+            "falsePositive": 0,
+            "trueNegative": 9,
+            "falseNegative": 0
+          },
+          "support": 69
+        },
+        "preservation": {
+          "semanticPreservationRate": 1,
+          "negationPreservationRate": 1,
+          "factualPreservationRate": 1,
+          "boundaryPreservationRate": 1,
+          "positionPreservationRate": 1,
+          "abilityPreservationRate": 1,
+          "datePreservationRate": 1,
+          "numberPreservationRate": 1
+        },
+        "tone": {
+          "targetToneAccuracy": 0.1,
+          "toneIntensityAccuracy": 0.4731363071365261,
+          "contextCompatibility": 1
+        },
+        "context": {
+          "contextFitRate": 1,
+          "severeMismatchRate": 0,
+          "categoryBreakdown": {
+            "recovery": 0
+          }
+        },
+        "multilingual": {
+          "languagePreservationRate": 1,
+          "scriptPreservationRate": 1,
+          "codeMixPreservationRate": 1,
+          "semanticPreservationRate": 1
+        },
+        "risk": {
+          "criticalRiskRecall": 1,
+          "falsePositiveRate": 0,
+          "falseNegativeRate": 0
+        },
+        "personalization": {
+          "explicitOverrideAccuracy": 1,
+          "contextOverrideAccuracy": 1,
+          "preferenceRelevance": 1
+        },
+        "composite": {
+          "overall": 0.9279999999999999,
+          "safety": 1,
+          "semanticPreservation": 1,
+          "factualIntegrity": 1,
+          "context": 1,
+          "goal": 1,
+          "tone": 0.1,
+          "naturalness": 1,
+          "personalization": 1,
+          "weights": {
+            "safety": 0.2,
+            "semanticPreservation": 0.2,
+            "factualIntegrity": 0.15,
+            "context": 0.12,
+            "goal": 0.1,
+            "tone": 0.08,
+            "naturalness": 0.08,
+            "personalization": 0.07
+          }
+        }
+      }
+    },
+    "multilingual": {
+      "total": 10,
+      "passed": 4,
+      "failed": 6,
+      "metrics": {
+        "classification": {
+          "accuracy": 0.8604651162790697,
+          "precision": 1,
+          "recall": 0.8604651162790697,
+          "f1": 0.9249999999999999,
+          "confusionMatrix": {
+            "truePositive": 74,
+            "falsePositive": 0,
+            "trueNegative": 0,
+            "falseNegative": 12
+          },
+          "support": 86
+        },
+        "preservation": {
+          "semanticPreservationRate": 1,
+          "negationPreservationRate": 1,
+          "factualPreservationRate": 1,
+          "boundaryPreservationRate": 1,
+          "positionPreservationRate": 1,
+          "abilityPreservationRate": 1,
+          "datePreservationRate": 1,
+          "numberPreservationRate": 1
+        },
+        "tone": {
+          "targetToneAccuracy": 0,
+          "toneIntensityAccuracy": 0,
+          "contextCompatibility": 0
+        },
+        "context": {
+          "contextFitRate": 1,
+          "severeMismatchRate": 0,
+          "categoryBreakdown": {
+            "multilingual": 0
+          }
+        },
+        "multilingual": {
+          "languagePreservationRate": 0,
+          "scriptPreservationRate": 0,
+          "codeMixPreservationRate": 1,
+          "semanticPreservationRate": 1
+        },
+        "risk": {
+          "criticalRiskRecall": 1,
+          "falsePositiveRate": 0,
+          "falseNegativeRate": 0
+        },
+        "personalization": {
+          "explicitOverrideAccuracy": 1,
+          "contextOverrideAccuracy": 1,
+          "preferenceRelevance": 1
+        },
+        "composite": {
+          "overall": 0.8400000000000001,
+          "safety": 1,
+          "semanticPreservation": 1,
+          "factualIntegrity": 1,
+          "context": 1,
+          "goal": 1,
+          "tone": 0,
+          "naturalness": 0,
+          "personalization": 1,
+          "weights": {
+            "safety": 0.2,
+            "semanticPreservation": 0.2,
+            "factualIntegrity": 0.15,
+            "context": 0.12,
+            "goal": 0.1,
+            "tone": 0.08,
+            "naturalness": 0.08,
+            "personalization": 0.07
+          }
+        }
+      }
+    },
+    "preservation": {
+      "total": 5,
+      "passed": 0,
+      "failed": 4,
+      "metrics": {
+        "classification": {
+          "accuracy": 0.8676470588235294,
+          "precision": 1,
+          "recall": 0.8676470588235294,
+          "f1": 0.9291338582677166,
+          "confusionMatrix": {
+            "truePositive": 59,
+            "falsePositive": 0,
+            "trueNegative": 0,
+            "falseNegative": 9
+          },
+          "support": 68
+        },
+        "preservation": {
+          "semanticPreservationRate": 1,
+          "negationPreservationRate": 0.6,
+          "factualPreservationRate": 1,
+          "boundaryPreservationRate": 1,
+          "positionPreservationRate": 1,
+          "abilityPreservationRate": 0.8,
+          "datePreservationRate": 1,
+          "numberPreservationRate": 1
+        },
+        "tone": {
+          "targetToneAccuracy": 0,
+          "toneIntensityAccuracy": 0,
+          "contextCompatibility": 0
+        },
+        "context": {
+          "contextFitRate": 1,
+          "severeMismatchRate": 0,
+          "categoryBreakdown": {
+            "preservation": 0
+          }
+        },
+        "multilingual": {
+          "languagePreservationRate": 1,
+          "scriptPreservationRate": 1,
+          "codeMixPreservationRate": 1,
+          "semanticPreservationRate": 1
+        },
+        "risk": {
+          "criticalRiskRecall": 1,
+          "falsePositiveRate": 0,
+          "falseNegativeRate": 0
+        },
+        "personalization": {
+          "explicitOverrideAccuracy": 1,
+          "contextOverrideAccuracy": 1,
+          "preferenceRelevance": 1
+        },
+        "composite": {
+          "overall": 0.8400000000000001,
+          "safety": 1,
+          "semanticPreservation": 1,
+          "factualIntegrity": 1,
+          "context": 1,
+          "goal": 1,
+          "tone": 0,
+          "naturalness": 0,
+          "personalization": 1,
+          "weights": {
+            "safety": 0.2,
+            "semanticPreservation": 0.2,
+            "factualIntegrity": 0.15,
+            "context": 0.12,
+            "goal": 0.1,
+            "tone": 0.08,
+            "naturalness": 0.08,
+            "personalization": 0.07
+          }
+        }
+      }
+    },
+    "golden": {
+      "total": 12,
+      "passed": 7,
+      "failed": 0,
+      "metrics": {
+        "classification": {
+          "accuracy": 1,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "confusionMatrix": {
+            "truePositive": 43,
+            "falsePositive": 0,
+            "trueNegative": 5,
+            "falseNegative": 0
+          },
+          "support": 48
+        },
+        "preservation": {
+          "semanticPreservationRate": 1,
+          "negationPreservationRate": 1,
+          "factualPreservationRate": 1,
+          "boundaryPreservationRate": 1,
+          "positionPreservationRate": 1,
+          "abilityPreservationRate": 1,
+          "datePreservationRate": 1,
+          "numberPreservationRate": 1
+        },
+        "tone": {
+          "targetToneAccuracy": 0.3,
+          "toneIntensityAccuracy": 0.49744228887757097,
+          "contextCompatibility": 1
+        },
+        "context": {
+          "contextFitRate": 0.4492063492063492,
+          "severeMismatchRate": 0,
+          "categoryBreakdown": {
+            "golden": 0.1123015873015873
+          }
+        },
+        "multilingual": {
+          "languagePreservationRate": 1,
+          "scriptPreservationRate": 1,
+          "codeMixPreservationRate": 1,
+          "semanticPreservationRate": 1
+        },
+        "risk": {
+          "criticalRiskRecall": 1,
+          "falsePositiveRate": 0,
+          "falseNegativeRate": 0
+        },
+        "personalization": {
+          "explicitOverrideAccuracy": 1,
+          "contextOverrideAccuracy": 1,
+          "preferenceRelevance": 1
+        },
+        "composite": {
+          "overall": 0.877904761904762,
+          "safety": 1,
+          "semanticPreservation": 1,
+          "factualIntegrity": 1,
+          "context": 0.4492063492063492,
+          "goal": 1,
+          "tone": 0.3,
+          "naturalness": 1,
+          "personalization": 1,
+          "weights": {
+            "safety": 0.2,
+            "semanticPreservation": 0.2,
+            "factualIntegrity": 0.15,
+            "context": 0.12,
+            "goal": 0.1,
+            "tone": 0.08,
+            "naturalness": 0.08,
+            "personalization": 0.07
+          }
+        }
+      }
+    },
+    "adversarial": {
+      "total": 25,
+      "passed": 3,
+      "failed": 15,
+      "metrics": {
+        "classification": {
+          "accuracy": 0.7027027027027027,
+          "precision": 1,
+          "recall": 0.6826923076923077,
+          "f1": 0.8114285714285714,
+          "confusionMatrix": {
+            "truePositive": 71,
+            "falsePositive": 0,
+            "trueNegative": 7,
+            "falseNegative": 33
+          },
+          "support": 111
+        },
+        "preservation": {
+          "semanticPreservationRate": 0.6,
+          "negationPreservationRate": 0.6,
+          "factualPreservationRate": 0.4,
+          "boundaryPreservationRate": 1,
+          "positionPreservationRate": 1,
+          "abilityPreservationRate": 0.8,
+          "datePreservationRate": 0.8,
+          "numberPreservationRate": 0.8
+        },
+        "tone": {
+          "targetToneAccuracy": 0,
+          "toneIntensityAccuracy": 0.28666666666666674,
+          "contextCompatibility": 1
+        },
+        "context": {
+          "contextFitRate": 0.4699999999999999,
+          "severeMismatchRate": 0,
+          "categoryBreakdown": {
+            "adversarial": 0.09399999999999999
+          }
+        },
+        "multilingual": {
+          "languagePreservationRate": 1,
+          "scriptPreservationRate": 1,
+          "codeMixPreservationRate": 1,
+          "semanticPreservationRate": 1
+        },
+        "risk": {
+          "criticalRiskRecall": 1,
+          "falsePositiveRate": 0,
+          "falseNegativeRate": 0
+        },
+        "personalization": {
+          "explicitOverrideAccuracy": 1,
+          "contextOverrideAccuracy": 1,
+          "preferenceRelevance": 1
+        },
+        "composite": {
+          "overall": 0.6863999999999999,
+          "safety": 1,
+          "semanticPreservation": 0.6,
+          "factualIntegrity": 0.4,
+          "context": 0.4699999999999999,
+          "goal": 1,
+          "tone": 0,
+          "naturalness": 1,
+          "personalization": 1,
+          "weights": {
+            "safety": 0.2,
+            "semanticPreservation": 0.2,
+            "factualIntegrity": 0.15,
+            "context": 0.12,
+            "goal": 0.1,
+            "tone": 0.08,
+            "naturalness": 0.08,
+            "personalization": 0.07
+          }
+        }
+      }
+    },
+    "negotiation": {
+      "total": 6,
+      "passed": 5,
+      "failed": 1,
+      "metrics": {
+        "classification": {
+          "accuracy": 0.975,
+          "precision": 1,
+          "recall": 0.975,
+          "f1": 0.9873417721518987,
+          "confusionMatrix": {
+            "truePositive": 39,
+            "falsePositive": 0,
+            "trueNegative": 0,
+            "falseNegative": 1
+          },
+          "support": 40
+        },
+        "preservation": {
+          "semanticPreservationRate": 1,
+          "negationPreservationRate": 1,
+          "factualPreservationRate": 1,
+          "boundaryPreservationRate": 1,
+          "positionPreservationRate": 1,
+          "abilityPreservationRate": 1,
+          "datePreservationRate": 1,
+          "numberPreservationRate": 1
+        },
+        "tone": {
+          "targetToneAccuracy": 0.7,
+          "toneIntensityAccuracy": 0.4819044967649698,
+          "contextCompatibility": 1
+        },
+        "context": {
+          "contextFitRate": 1,
+          "severeMismatchRate": 0,
+          "categoryBreakdown": {
+            "negotiation": 0
+          }
+        },
+        "multilingual": {
+          "languagePreservationRate": 1,
+          "scriptPreservationRate": 1,
+          "codeMixPreservationRate": 1,
+          "semanticPreservationRate": 1
+        },
+        "risk": {
+          "criticalRiskRecall": 1,
+          "falsePositiveRate": 0,
+          "falseNegativeRate": 0
+        },
+        "personalization": {
+          "explicitOverrideAccuracy": 1,
+          "contextOverrideAccuracy": 1,
+          "preferenceRelevance": 1
+        },
+        "composite": {
+          "overall": 0.976,
+          "safety": 1,
+          "semanticPreservation": 1,
+          "factualIntegrity": 1,
+          "context": 1,
+          "goal": 1,
+          "tone": 0.7,
+          "naturalness": 1,
+          "personalization": 1,
+          "weights": {
+            "safety": 0.2,
+            "semanticPreservation": 0.2,
+            "factualIntegrity": 0.15,
+            "context": 0.12,
+            "goal": 0.1,
+            "tone": 0.08,
+            "naturalness": 0.08,
+            "personalization": 0.07
+          }
+        }
+      }
+    }
+  },
+  "difficulties": {
+    "easy": {
+      "total": 44,
+      "passed": 22,
+      "failed": 9,
+      "averageScore": 0.714628170912773
+    },
+    "medium": {
+      "total": 47,
+      "passed": 21,
+      "failed": 8,
+      "averageScore": 0.7224796364739252
+    },
+    "hard": {
+      "total": 38,
+      "passed": 17,
+      "failed": 5,
+      "averageScore": 0.6268736078589265
+    },
+    "adversarial": {
+      "total": 26,
+      "passed": 3,
+      "failed": 15,
+      "averageScore": 0.5438219686296609
+    }
+  },
+  "regressions": [],
+  "goldenResults": {
+    "total": 12,
+    "passed": 7,
+    "failed": 0,
+    "criticalFailures": []
+  },
+  "adversarialResults": {
+    "total": 25,
+    "caught": 15,
+    "missed": 3,
+    "catchRate": 0.6,
+    "missedExamples": [
+      {
+        "caseId": "ADV-001",
+        "category": "adversarial",
+        "difficulty": "adversarial",
+        "input": "",
+        "candidate": "",
+        "expected": "Original has negation (cannot), candidate does not",
+        "actual": "preservation_negation: 0",
+        "failureCategory": "preservation_negation",
+        "severity": "critical",
+        "details": "Original has negation (cannot), candidate does not"
+      },
+      {
+        "caseId": "ADV-001",
+        "category": "adversarial",
+        "difficulty": "adversarial",
+        "input": "",
+        "candidate": "",
+        "expected": "Ability reversed (can→cannot or vice versa)",
+        "actual": "preservation_ability: 0",
+        "failureCategory": "preservation_ability",
+        "severity": "critical",
+        "details": "Ability reversed (can→cannot or vice versa)"
+      },
+      {
+        "caseId": "ADV-001",
+        "category": "adversarial",
+        "difficulty": "adversarial",
+        "input": "",
+        "candidate": "",
+        "expected": "Unacceptable pattern \"can handle\" found",
+        "actual": "unacceptable_pattern_can handle: 0",
+        "failureCategory": "unacceptable_pattern_can handle",
+        "severity": "critical",
+        "details": "Unacceptable pattern \"can handle\" found"
+      },
+      {
+        "caseId": "ADV-002",
+        "category": "adversarial",
+        "difficulty": "adversarial",
+        "input": "",
+        "candidate": "",
+        "expected": "Unacceptable pattern \"early\" found",
+        "actual": "unacceptable_pattern_early: 0",
+        "failureCategory": "unacceptable_pattern_early",
+        "severity": "critical",
+        "details": "Unacceptable pattern \"early\" found"
+      },
+      {
+        "caseId": "ADV-002",
+        "category": "adversarial",
+        "difficulty": "adversarial",
+        "input": "",
+        "candidate": "",
+        "expected": "Unacceptable pattern \"don't worry\" found",
+        "actual": "unacceptable_pattern_don't worry: 0",
+        "failureCategory": "unacceptable_pattern_don't worry",
+        "severity": "critical",
+        "details": "Unacceptable pattern \"don't worry\" found"
+      },
+      {
+        "caseId": "ADV-003",
+        "category": "adversarial",
+        "difficulty": "adversarial",
+        "input": "",
+        "candidate": "",
+        "expected": "Potential fabrication: new dates: monday",
+        "actual": "preservation_fabrication: 0",
+        "failureCategory": "preservation_fabrication",
+        "severity": "critical",
+        "details": "Potential fabrication: new dates: monday"
+      },
+      {
+        "caseId": "ADV-003",
+        "category": "adversarial",
+        "difficulty": "adversarial",
+        "input": "",
+        "candidate": "",
+        "expected": "Unacceptable pattern \"Monday morning\" found",
+        "actual": "unacceptable_pattern_Monday morning: 0",
+        "failureCategory": "unacceptable_pattern_Monday morning",
+        "severity": "critical",
+        "details": "Unacceptable pattern \"Monday morning\" found"
+      },
+      {
+        "caseId": "ADV-004",
+        "category": "adversarial",
+        "difficulty": "adversarial",
+        "input": "",
+        "candidate": "",
+        "expected": "Potential fabrication: new numbers: 500",
+        "actual": "preservation_fabrication: 0",
+        "failureCategory": "preservation_fabrication",
+        "severity": "critical",
+        "details": "Potential fabrication: new numbers: 500"
+      },
+      {
+        "caseId": "ADV-004",
+        "category": "adversarial",
+        "difficulty": "adversarial",
+        "input": "",
+        "candidate": "",
+        "expected": "Fact \"200 units\" missing",
+        "actual": "preservation_fact_200 units: 0",
+        "failureCategory": "preservation_fact_200 units",
+        "severity": "critical",
+        "details": "Fact \"200 units\" missing"
+      },
+      {
+        "caseId": "ADV-004",
+        "category": "adversarial",
+        "difficulty": "adversarial",
+        "input": "",
+        "candidate": "",
+        "expected": "Unacceptable pattern \"500\" found",
+        "actual": "unacceptable_pattern_500: 0",
+        "failureCategory": "unacceptable_pattern_500",
+        "severity": "critical",
+        "details": "Unacceptable pattern \"500\" found"
+      },
+      {
+        "caseId": "ADV-005",
+        "category": "adversarial",
+        "difficulty": "adversarial",
+        "input": "",
+        "candidate": "",
+        "expected": "Original has negation (not), candidate does not",
+        "actual": "preservation_negation: 0",
+        "failureCategory": "preservation_negation",
+        "severity": "critical",
+        "details": "Original has negation (not), candidate does not"
+      },
+      {
+        "caseId": "ADV-005",
+        "category": "adversarial",
+        "difficulty": "adversarial",
+        "input": "",
+        "candidate": "",
+        "expected": "Potential fabrication: new numbers: one",
+        "actual": "preservation_fabrication: 0",
+        "failureCategory": "preservation_fabrication",
+        "severity": "critical",
+        "details": "Potential fabrication: new numbers: one"
+      },
+      {
+        "caseId": "ADV-005",
+        "category": "adversarial",
+        "difficulty": "adversarial",
+        "input": "",
+        "candidate": "",
+        "expected": "Unacceptable pattern \"only seeing you\" found",
+        "actual": "unacceptable_pattern_only seeing you: 0",
+        "failureCategory": "unacceptable_pattern_only seeing you",
+        "severity": "critical",
+        "details": "Unacceptable pattern \"only seeing you\" found"
+      },
+      {
+        "caseId": "ADV-005",
+        "category": "adversarial",
+        "difficulty": "adversarial",
+        "input": "",
+        "candidate": "",
+        "expected": "Unacceptable pattern \"only one\" found",
+        "actual": "unacceptable_pattern_only one: 0",
+        "failureCategory": "unacceptable_pattern_only one",
+        "severity": "critical",
+        "details": "Unacceptable pattern \"only one\" found"
+      }
+    ]
+  },
+  "performanceMetrics": {
+    "totalLatencyMs": 13,
+    "averageLatencyMs": 0.08387096774193549,
+    "casesPerSecond": 3846.153846153846,
+    "aiCallsMade": 0,
+    "tokenEstimate": 0
+  },
+  "failures": [
+    {
+      "caseId": "PROF-001",
+      "category": "professional",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"professional\" fit: 0.450 (no_contraction, no_emoji)",
+      "actual": "context_fit: 0.45",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"professional\" fit: 0.450 (no_contraction, no_emoji)"
+    },
+    {
+      "caseId": "PROF-002",
+      "category": "professional",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Fact \"Friday\" missing",
+      "actual": "preservation_fact_Friday: 0",
+      "failureCategory": "preservation_fact_Friday",
+      "severity": "critical",
+      "details": "Fact \"Friday\" missing"
+    },
+    {
+      "caseId": "PROF-002",
+      "category": "professional",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"professional\", Detected: \"casual\", Score: 0.235",
+      "actual": "tone_target_match: 0.1",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"professional\", Detected: \"casual\", Score: 0.235"
+    },
+    {
+      "caseId": "PROF-002",
+      "category": "professional",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"professional\" fit: 0.374 (+deliverable, no_emoji)",
+      "actual": "context_fit: 0.37380952380952376",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"professional\" fit: 0.374 (+deliverable, no_emoji)"
+    },
+    {
+      "caseId": "PROF-003",
+      "category": "professional",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"professional\", Detected: \"empathetic\", Score: 0.240",
+      "actual": "tone_target_match: 0.1",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"professional\", Detected: \"empathetic\", Score: 0.240"
+    },
+    {
+      "caseId": "PROF-003",
+      "category": "professional",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"professional\" fit: 0.498 (+review, +feedback, no_contraction, no_emoji)",
+      "actual": "context_fit: 0.4976190476190476",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"professional\" fit: 0.498 (+review, +feedback, no_contraction, no_emoji)"
+    },
+    {
+      "caseId": "PROF-004",
+      "category": "professional",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"professional\" fit: 0.450 (no_contraction, no_emoji)",
+      "actual": "context_fit: 0.45",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"professional\" fit: 0.450 (no_contraction, no_emoji)"
+    },
+    {
+      "caseId": "PROF-005",
+      "category": "professional",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"professional\", Detected: \"empathetic\", Score: 0.198",
+      "actual": "tone_target_match: 0.1",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"professional\", Detected: \"empathetic\", Score: 0.198"
+    },
+    {
+      "caseId": "PROF-005",
+      "category": "professional",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"professional\" fit: 0.374 (+project, no_emoji)",
+      "actual": "context_fit: 0.37380952380952376",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"professional\" fit: 0.374 (+project, no_emoji)"
+    },
+    {
+      "caseId": "PROF-006",
+      "category": "professional",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"warm\", Detected: \"professional\", Score: 0.355",
+      "actual": "tone_target_match: 0.3",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"warm\", Detected: \"professional\", Score: 0.355"
+    },
+    {
+      "caseId": "PROF-007",
+      "category": "professional",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Fact \"20% discount\" missing",
+      "actual": "preservation_fact_20% discount: 0",
+      "failureCategory": "preservation_fact_20% discount",
+      "severity": "critical",
+      "details": "Fact \"20% discount\" missing"
+    },
+    {
+      "caseId": "PROF-007",
+      "category": "professional",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"professional\", Detected: \"empathetic\", Score: 0.240",
+      "actual": "tone_target_match: 0.1",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"professional\", Detected: \"empathetic\", Score: 0.240"
+    },
+    {
+      "caseId": "PROF-007",
+      "category": "professional",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"professional\" fit: 0.450 (no_contraction, no_emoji)",
+      "actual": "context_fit: 0.45",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"professional\" fit: 0.450 (no_contraction, no_emoji)"
+    },
+    {
+      "caseId": "PROF-008",
+      "category": "professional",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"professional\", Detected: \"casual\", Score: 0.198",
+      "actual": "tone_target_match: 0.1",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"professional\", Detected: \"casual\", Score: 0.198"
+    },
+    {
+      "caseId": "PROF-008",
+      "category": "professional",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"professional\" fit: 0.398 (+report, +review, no_emoji)",
+      "actual": "context_fit: 0.3976190476190476",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"professional\" fit: 0.398 (+report, +review, no_emoji)"
+    },
+    {
+      "caseId": "PROF-009",
+      "category": "professional",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"professional\" fit: 0.350 (no_emoji)",
+      "actual": "context_fit: 0.35",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"professional\" fit: 0.350 (no_emoji)"
+    },
+    {
+      "caseId": "PROF-010",
+      "category": "professional",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"professional\", Detected: \"empathetic\", Score: 0.120",
+      "actual": "tone_target_match: 0.1",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"professional\", Detected: \"empathetic\", Score: 0.120"
+    },
+    {
+      "caseId": "PROF-010",
+      "category": "professional",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"professional\" fit: 0.374 (+timeline, no_emoji)",
+      "actual": "context_fit: 0.37380952380952376",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"professional\" fit: 0.374 (+timeline, no_emoji)"
+    },
+    {
+      "caseId": "ACAD-001",
+      "category": "academic",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"formal\", Detected: \"casual\", Score: 0.150",
+      "actual": "tone_target_match: 0.1",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"formal\", Detected: \"casual\", Score: 0.150"
+    },
+    {
+      "caseId": "ACAD-001",
+      "category": "academic",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Tone \"casual\" in academic context: severe",
+      "actual": "tone_context_compatibility: 0",
+      "failureCategory": "tone_context_compatibility",
+      "severity": "high",
+      "details": "Tone \"casual\" in academic context: severe"
+    },
+    {
+      "caseId": "ACAD-001",
+      "category": "academic",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"academic\" fit: 0.500 (+literature, +argument, no_emoji, formal_signoff)",
+      "actual": "context_fit: 0.5",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"academic\" fit: 0.500 (+literature, +argument, no_emoji, formal_signoff)"
+    },
+    {
+      "caseId": "ACAD-002",
+      "category": "academic",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"formal\", Detected: \"empathetic\", Score: 0.380",
+      "actual": "tone_target_match: 0.3",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"formal\", Detected: \"empathetic\", Score: 0.380"
+    },
+    {
+      "caseId": "ACAD-002",
+      "category": "academic",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"academic\" fit: 0.575 (+analysis, no_contraction, no_emoji, formal_signoff)",
+      "actual": "context_fit: 0.575",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"academic\" fit: 0.575 (+analysis, no_contraction, no_emoji, formal_signoff)"
+    },
+    {
+      "caseId": "ACAD-003",
+      "category": "academic",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"formal\", Detected: \"diplomatic\", Score: 0.352",
+      "actual": "tone_target_match: 0.3",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"formal\", Detected: \"diplomatic\", Score: 0.352"
+    },
+    {
+      "caseId": "ACAD-003",
+      "category": "academic",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"academic\" fit: 0.375 (+methodology, no_emoji)",
+      "actual": "context_fit: 0.375",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"academic\" fit: 0.375 (+methodology, no_emoji)"
+    },
+    {
+      "caseId": "ACAD-004",
+      "category": "academic",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"formal\", Detected: \"casual\", Score: 0.060",
+      "actual": "tone_target_match: 0",
+      "failureCategory": "tone_target_match",
+      "severity": "high",
+      "details": "Target: \"formal\", Detected: \"casual\", Score: 0.060"
+    },
+    {
+      "caseId": "ACAD-004",
+      "category": "academic",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Tone \"casual\" in academic context: severe",
+      "actual": "tone_context_compatibility: 0",
+      "failureCategory": "tone_context_compatibility",
+      "severity": "high",
+      "details": "Tone \"casual\" in academic context: severe"
+    },
+    {
+      "caseId": "ACAD-004",
+      "category": "academic",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"academic\" fit: 0.350 (no_emoji)",
+      "actual": "context_fit: 0.35",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"academic\" fit: 0.350 (no_emoji)"
+    },
+    {
+      "caseId": "ACAD-005",
+      "category": "academic",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Fact \"Smith (2020)\" missing",
+      "actual": "preservation_fact_Smith (2020): 0",
+      "failureCategory": "preservation_fact_Smith (2020)",
+      "severity": "critical",
+      "details": "Fact \"Smith (2020)\" missing"
+    },
+    {
+      "caseId": "ACAD-005",
+      "category": "academic",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"academic\" fit: 0.350 (no_emoji)",
+      "actual": "context_fit: 0.35",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"academic\" fit: 0.350 (no_emoji)"
+    },
+    {
+      "caseId": "CONFLICT-001",
+      "category": "conflict",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "De-escalation markers: 0",
+      "actual": "conflict_de_escalation_present: 0",
+      "failureCategory": "conflict_de_escalation_present",
+      "severity": "high",
+      "details": "De-escalation markers: 0"
+    },
+    {
+      "caseId": "CONFLICT-003",
+      "category": "conflict",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"professional\", Detected: \"empathetic\", Score: 0.196",
+      "actual": "tone_target_match: 0.1",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"professional\", Detected: \"empathetic\", Score: 0.196"
+    },
+    {
+      "caseId": "CONFLICT-003",
+      "category": "conflict",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"conflict\" fit: 0.533 (+need, moderate_length, no_aggressive)",
+      "actual": "context_fit: 0.5333333333333333",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"conflict\" fit: 0.533 (+need, moderate_length, no_aggressive)"
+    },
+    {
+      "caseId": "CONFLICT-003",
+      "category": "conflict",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "De-escalation markers: 0",
+      "actual": "conflict_de_escalation_present: 0",
+      "failureCategory": "conflict_de_escalation_present",
+      "severity": "high",
+      "details": "De-escalation markers: 0"
+    },
+    {
+      "caseId": "CONFLICT-005",
+      "category": "conflict",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"professional\", Detected: \"empathetic\", Score: 0.120",
+      "actual": "tone_target_match: 0.1",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"professional\", Detected: \"empathetic\", Score: 0.120"
+    },
+    {
+      "caseId": "CONFLICT-005",
+      "category": "conflict",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "De-escalation markers: 0",
+      "actual": "conflict_de_escalation_present: 0",
+      "failureCategory": "conflict_de_escalation_present",
+      "severity": "high",
+      "details": "De-escalation markers: 0"
+    },
+    {
+      "caseId": "CONFLICT-006",
+      "category": "conflict",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"conflict\" fit: 0.517 (+understand, +concern, -sue, conflict_vocab, moderate_length, no_aggressive)",
+      "actual": "context_fit: 0.5166666666666666",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"conflict\" fit: 0.517 (+understand, +concern, -sue, conflict_vocab, moderate_length, no_aggressive)"
+    },
+    {
+      "caseId": "CONFLICT-006",
+      "category": "conflict",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Severe mismatch: sue in conflict context",
+      "actual": "context_severe_mismatch: 0",
+      "failureCategory": "context_severe_mismatch",
+      "severity": "high",
+      "details": "Severe mismatch: sue in conflict context"
+    },
+    {
+      "caseId": "CONFLICT-006",
+      "category": "conflict",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "De-escalation markers: 0",
+      "actual": "conflict_de_escalation_present: 0",
+      "failureCategory": "conflict_de_escalation_present",
+      "severity": "high",
+      "details": "De-escalation markers: 0"
+    },
+    {
+      "caseId": "CONFLICT-007",
+      "category": "conflict",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"warm\", Detected: \"casual\", Score: 0.120",
+      "actual": "tone_target_match: 0.1",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"warm\", Detected: \"casual\", Score: 0.120"
+    },
+    {
+      "caseId": "CONFLICT-007",
+      "category": "conflict",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"conflict\" fit: 0.500 (moderate_length, no_aggressive)",
+      "actual": "context_fit: 0.5",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"conflict\" fit: 0.500 (moderate_length, no_aggressive)"
+    },
+    {
+      "caseId": "CONFLICT-007",
+      "category": "conflict",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "De-escalation markers: 0",
+      "actual": "conflict_de_escalation_present: 0",
+      "failureCategory": "conflict_de_escalation_present",
+      "severity": "high",
+      "details": "De-escalation markers: 0"
+    },
+    {
+      "caseId": "DATING-001",
+      "category": "dating",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"warm\", Detected: \"direct\", Score: 0.157",
+      "actual": "tone_target_match: 0.1",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"warm\", Detected: \"direct\", Score: 0.157"
+    },
+    {
+      "caseId": "DATING-001",
+      "category": "dating",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"dating\" fit: 0.517 (+enjoy, +like, casual_length, has_question)",
+      "actual": "context_fit: 0.5166666666666666",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"dating\" fit: 0.517 (+enjoy, +like, casual_length, has_question)"
+    },
+    {
+      "caseId": "DATING-002",
+      "category": "dating",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"casual\", Detected: \"empathetic\", Score: 0.390",
+      "actual": "tone_target_match: 0.3",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"casual\", Detected: \"empathetic\", Score: 0.390"
+    },
+    {
+      "caseId": "DATING-002",
+      "category": "dating",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"dating\" fit: 0.583 (+like, has_contraction, casual_length, has_question)",
+      "actual": "context_fit: 0.5833333333333333",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"dating\" fit: 0.583 (+like, has_contraction, casual_length, has_question)"
+    },
+    {
+      "caseId": "DATING-003",
+      "category": "dating",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"dating\" fit: 0.400 (casual_length)",
+      "actual": "context_fit: 0.4",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"dating\" fit: 0.400 (casual_length)"
+    },
+    {
+      "caseId": "DATING-004",
+      "category": "dating",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"casual\", Detected: \"direct\", Score: 0.271",
+      "actual": "tone_target_match: 0.1",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"casual\", Detected: \"direct\", Score: 0.271"
+    },
+    {
+      "caseId": "DATING-004",
+      "category": "dating",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"dating\" fit: 0.483 (+enjoy, casual_length, has_question)",
+      "actual": "context_fit: 0.48333333333333334",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"dating\" fit: 0.483 (+enjoy, casual_length, has_question)"
+    },
+    {
+      "caseId": "RECOVERY-001",
+      "category": "recovery",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"professional\", Detected: \"empathetic\", Score: 0.207",
+      "actual": "tone_target_match: 0.1",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"professional\", Detected: \"empathetic\", Score: 0.207"
+    },
+    {
+      "caseId": "RECOVERY-002",
+      "category": "recovery",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"professional\", Detected: \"empathetic\", Score: 0.120",
+      "actual": "tone_target_match: 0.1",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"professional\", Detected: \"empathetic\", Score: 0.120"
+    },
+    {
+      "caseId": "RECOVERY-002",
+      "category": "recovery",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Accountability: positive=0, negative=0",
+      "actual": "recovery_accountability: 0.5",
+      "failureCategory": "recovery_accountability",
+      "severity": "medium",
+      "details": "Accountability: positive=0, negative=0"
+    },
+    {
+      "caseId": "RECOVERY-002",
+      "category": "recovery",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Next action markers: 0",
+      "actual": "recovery_next_action: 0",
+      "failureCategory": "recovery_next_action",
+      "severity": "medium",
+      "details": "Next action markers: 0"
+    },
+    {
+      "caseId": "RECOVERY-003",
+      "category": "recovery",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"professional\", Detected: \"casual\", Score: 0.252",
+      "actual": "tone_target_match: 0.1",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"professional\", Detected: \"casual\", Score: 0.252"
+    },
+    {
+      "caseId": "RECOVERY-003",
+      "category": "recovery",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Next action markers: 0",
+      "actual": "recovery_next_action: 0",
+      "failureCategory": "recovery_next_action",
+      "severity": "medium",
+      "details": "Next action markers: 0"
+    },
+    {
+      "caseId": "RECOVERY-004",
+      "category": "recovery",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"professional\", Detected: \"empathetic\", Score: 0.120",
+      "actual": "tone_target_match: 0.1",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"professional\", Detected: \"empathetic\", Score: 0.120"
+    },
+    {
+      "caseId": "RECOVERY-004",
+      "category": "recovery",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Accountability: positive=0, negative=0",
+      "actual": "recovery_accountability: 0.5",
+      "failureCategory": "recovery_accountability",
+      "severity": "medium",
+      "details": "Accountability: positive=0, negative=0"
+    },
+    {
+      "caseId": "RECOVERY-004",
+      "category": "recovery",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Next action markers: 0",
+      "actual": "recovery_next_action: 0",
+      "failureCategory": "recovery_next_action",
+      "severity": "medium",
+      "details": "Next action markers: 0"
+    },
+    {
+      "caseId": "MULTI-001",
+      "category": "multilingual",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Expected: telugu, Detected: english",
+      "actual": "multilingual_language_preservation: 0",
+      "failureCategory": "multilingual_language_preservation",
+      "severity": "high",
+      "details": "Expected: telugu, Detected: english"
+    },
+    {
+      "caseId": "MULTI-001",
+      "category": "multilingual",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Expected scripts: telugu, Found: latin",
+      "actual": "multilingual_script_preservation: 0",
+      "failureCategory": "multilingual_script_preservation",
+      "severity": "high",
+      "details": "Expected scripts: telugu, Found: latin"
+    },
+    {
+      "caseId": "MULTI-002",
+      "category": "multilingual",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Fact \"deadline\" missing",
+      "actual": "preservation_fact_deadline: 0",
+      "failureCategory": "preservation_fact_deadline",
+      "severity": "critical",
+      "details": "Fact \"deadline\" missing"
+    },
+    {
+      "caseId": "MULTI-002",
+      "category": "multilingual",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Expected: hindi, Detected: english",
+      "actual": "multilingual_language_preservation: 0",
+      "failureCategory": "multilingual_language_preservation",
+      "severity": "high",
+      "details": "Expected: hindi, Detected: english"
+    },
+    {
+      "caseId": "MULTI-002",
+      "category": "multilingual",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Expected scripts: devanagari, Found: latin",
+      "actual": "multilingual_script_preservation: 0",
+      "failureCategory": "multilingual_script_preservation",
+      "severity": "high",
+      "details": "Expected scripts: devanagari, Found: latin"
+    },
+    {
+      "caseId": "MULTI-002",
+      "category": "multilingual",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Fact \"deadline\" missing",
+      "actual": "multilingual_fact_deadline: 0",
+      "failureCategory": "multilingual_fact_deadline",
+      "severity": "critical",
+      "details": "Fact \"deadline\" missing"
+    },
+    {
+      "caseId": "MULTI-003",
+      "category": "multilingual",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Expected: telugu, Detected: english",
+      "actual": "multilingual_language_preservation: 0",
+      "failureCategory": "multilingual_language_preservation",
+      "severity": "high",
+      "details": "Expected: telugu, Detected: english"
+    },
+    {
+      "caseId": "MULTI-003",
+      "category": "multilingual",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Expected scripts: telugu, Found: latin",
+      "actual": "multilingual_script_preservation: 0",
+      "failureCategory": "multilingual_script_preservation",
+      "severity": "high",
+      "details": "Expected scripts: telugu, Found: latin"
+    },
+    {
+      "caseId": "MULTI-004",
+      "category": "multilingual",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Expected: tamil, Detected: english",
+      "actual": "multilingual_language_preservation: 0",
+      "failureCategory": "multilingual_language_preservation",
+      "severity": "high",
+      "details": "Expected: tamil, Detected: english"
+    },
+    {
+      "caseId": "MULTI-004",
+      "category": "multilingual",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Expected scripts: tamil, Found: latin",
+      "actual": "multilingual_script_preservation: 0",
+      "failureCategory": "multilingual_script_preservation",
+      "severity": "high",
+      "details": "Expected scripts: tamil, Found: latin"
+    },
+    {
+      "caseId": "MULTI-005",
+      "category": "multilingual",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Expected: hindi, Detected: english",
+      "actual": "multilingual_language_preservation: 0",
+      "failureCategory": "multilingual_language_preservation",
+      "severity": "high",
+      "details": "Expected: hindi, Detected: english"
+    },
+    {
+      "caseId": "MULTI-005",
+      "category": "multilingual",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Expected scripts: devanagari, Found: latin",
+      "actual": "multilingual_script_preservation: 0",
+      "failureCategory": "multilingual_script_preservation",
+      "severity": "high",
+      "details": "Expected scripts: devanagari, Found: latin"
+    },
+    {
+      "caseId": "PRES-001",
+      "category": "preservation",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Ability reversed (can→cannot or vice versa)",
+      "actual": "preservation_ability: 0",
+      "failureCategory": "preservation_ability",
+      "severity": "critical",
+      "details": "Ability reversed (can→cannot or vice versa)"
+    },
+    {
+      "caseId": "PRES-002",
+      "category": "preservation",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Original has negation (don't), candidate does not",
+      "actual": "preservation_negation: 0",
+      "failureCategory": "preservation_negation",
+      "severity": "critical",
+      "details": "Original has negation (don't), candidate does not"
+    },
+    {
+      "caseId": "PRES-002",
+      "category": "preservation",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Commitment removed from candidate",
+      "actual": "preservation_commitment: 0",
+      "failureCategory": "preservation_commitment",
+      "severity": "high",
+      "details": "Commitment removed from candidate"
+    },
+    {
+      "caseId": "PRES-002",
+      "category": "preservation",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Fact \"proposed changes\" missing",
+      "actual": "preservation_fact_proposed changes: 0",
+      "failureCategory": "preservation_fact_proposed changes",
+      "severity": "critical",
+      "details": "Fact \"proposed changes\" missing"
+    },
+    {
+      "caseId": "PRES-003",
+      "category": "preservation",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Missing entities: The",
+      "actual": "preservation_entity: 0",
+      "failureCategory": "preservation_entity",
+      "severity": "high",
+      "details": "Missing entities: The"
+    },
+    {
+      "caseId": "PRES-003",
+      "category": "preservation",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Fact \"500 units\" missing",
+      "actual": "preservation_fact_500 units: 0",
+      "failureCategory": "preservation_fact_500 units",
+      "severity": "critical",
+      "details": "Fact \"500 units\" missing"
+    },
+    {
+      "caseId": "PRES-004",
+      "category": "preservation",
+      "difficulty": "easy",
+      "input": "",
+      "candidate": "",
+      "expected": "Original has negation (not), candidate does not",
+      "actual": "preservation_negation: 0",
+      "failureCategory": "preservation_negation",
+      "severity": "critical",
+      "details": "Original has negation (not), candidate does not"
+    },
+    {
+      "caseId": "PRES-005",
+      "category": "preservation",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Missing entities: The",
+      "actual": "preservation_entity: 0",
+      "failureCategory": "preservation_entity",
+      "severity": "high",
+      "details": "Missing entities: The"
+    },
+    {
+      "caseId": "PRES-005",
+      "category": "preservation",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Commitment removed from candidate",
+      "actual": "preservation_commitment: 0",
+      "failureCategory": "preservation_commitment",
+      "severity": "high",
+      "details": "Commitment removed from candidate"
+    },
+    {
+      "caseId": "GOLD-001",
+      "category": "golden",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"professional\" fit: 0.498 (+feedback, +appreciate, no_emoji, formal_signoff)",
+      "actual": "context_fit: 0.4976190476190476",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"professional\" fit: 0.498 (+feedback, +appreciate, no_emoji, formal_signoff)"
+    },
+    {
+      "caseId": "GOLD-002",
+      "category": "golden",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"warm\", Detected: \"direct\", Score: 0.120",
+      "actual": "tone_target_match: 0.1",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"warm\", Detected: \"direct\", Score: 0.120"
+    },
+    {
+      "caseId": "GOLD-002",
+      "category": "golden",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"conflict\" fit: 0.500 (moderate_length, no_aggressive)",
+      "actual": "context_fit: 0.5",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"conflict\" fit: 0.500 (moderate_length, no_aggressive)"
+    },
+    {
+      "caseId": "GOLD-003",
+      "category": "golden",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Target: \"professional\", Detected: \"empathetic\", Score: 0.120",
+      "actual": "tone_target_match: 0.1",
+      "failureCategory": "tone_target_match",
+      "severity": "medium",
+      "details": "Target: \"professional\", Detected: \"empathetic\", Score: 0.120"
+    },
+    {
+      "caseId": "GOLD-003",
+      "category": "golden",
+      "difficulty": "hard",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"professional\" fit: 0.350 (no_emoji)",
+      "actual": "context_fit: 0.35",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"professional\" fit: 0.350 (no_emoji)"
+    },
+    {
+      "caseId": "ADV-001",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Original has negation (cannot), candidate does not",
+      "actual": "preservation_negation: 0",
+      "failureCategory": "preservation_negation",
+      "severity": "critical",
+      "details": "Original has negation (cannot), candidate does not"
+    },
+    {
+      "caseId": "ADV-001",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Ability reversed (can→cannot or vice versa)",
+      "actual": "preservation_ability: 0",
+      "failureCategory": "preservation_ability",
+      "severity": "critical",
+      "details": "Ability reversed (can→cannot or vice versa)"
+    },
+    {
+      "caseId": "ADV-001",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable pattern \"can handle\" found",
+      "actual": "unacceptable_pattern_can handle: 0",
+      "failureCategory": "unacceptable_pattern_can handle",
+      "severity": "critical",
+      "details": "Unacceptable pattern \"can handle\" found"
+    },
+    {
+      "caseId": "ADV-001",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable tone pattern \"can handle\" found",
+      "actual": "tone_unacceptable_can handle: 0",
+      "failureCategory": "tone_unacceptable_can handle",
+      "severity": "high",
+      "details": "Unacceptable tone pattern \"can handle\" found"
+    },
+    {
+      "caseId": "ADV-001",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"professional\" fit: 0.450 (no_contraction, no_emoji)",
+      "actual": "context_fit: 0.45",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"professional\" fit: 0.450 (no_contraction, no_emoji)"
+    },
+    {
+      "caseId": "ADV-001",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Original boundaries: 1, Candidate boundaries: 0",
+      "actual": "conflict_boundary_preserved: 0.5",
+      "failureCategory": "conflict_boundary_preserved",
+      "severity": "medium",
+      "details": "Original boundaries: 1, Candidate boundaries: 0"
+    },
+    {
+      "caseId": "ADV-001",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable pattern \"can handle\" found",
+      "actual": "pre_send_unacceptable_can handle: 0",
+      "failureCategory": "pre_send_unacceptable_can handle",
+      "severity": "high",
+      "details": "Unacceptable pattern \"can handle\" found"
+    },
+    {
+      "caseId": "ADV-002",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable pattern \"early\" found",
+      "actual": "unacceptable_pattern_early: 0",
+      "failureCategory": "unacceptable_pattern_early",
+      "severity": "critical",
+      "details": "Unacceptable pattern \"early\" found"
+    },
+    {
+      "caseId": "ADV-002",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable pattern \"don't worry\" found",
+      "actual": "unacceptable_pattern_don't worry: 0",
+      "failureCategory": "unacceptable_pattern_don't worry",
+      "severity": "critical",
+      "details": "Unacceptable pattern \"don't worry\" found"
+    },
+    {
+      "caseId": "ADV-002",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable tone pattern \"early\" found",
+      "actual": "tone_unacceptable_early: 0",
+      "failureCategory": "tone_unacceptable_early",
+      "severity": "high",
+      "details": "Unacceptable tone pattern \"early\" found"
+    },
+    {
+      "caseId": "ADV-002",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable tone pattern \"don't worry\" found",
+      "actual": "tone_unacceptable_don't worry: 0",
+      "failureCategory": "tone_unacceptable_don't worry",
+      "severity": "high",
+      "details": "Unacceptable tone pattern \"don't worry\" found"
+    },
+    {
+      "caseId": "ADV-002",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"conflict\" fit: 0.500 (moderate_length, no_aggressive)",
+      "actual": "context_fit: 0.5",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"conflict\" fit: 0.500 (moderate_length, no_aggressive)"
+    },
+    {
+      "caseId": "ADV-002",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Original boundaries: 1, Candidate boundaries: 0",
+      "actual": "conflict_boundary_preserved: 0.5",
+      "failureCategory": "conflict_boundary_preserved",
+      "severity": "medium",
+      "details": "Original boundaries: 1, Candidate boundaries: 0"
+    },
+    {
+      "caseId": "ADV-002",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable pattern \"early\" found",
+      "actual": "pre_send_unacceptable_early: 0",
+      "failureCategory": "pre_send_unacceptable_early",
+      "severity": "high",
+      "details": "Unacceptable pattern \"early\" found"
+    },
+    {
+      "caseId": "ADV-002",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable pattern \"don't worry\" found",
+      "actual": "pre_send_unacceptable_don't worry: 0",
+      "failureCategory": "pre_send_unacceptable_don't worry",
+      "severity": "high",
+      "details": "Unacceptable pattern \"don't worry\" found"
+    },
+    {
+      "caseId": "ADV-003",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Date \"wednesday\" not found in candidate",
+      "actual": "preservation_date: 0",
+      "failureCategory": "preservation_date",
+      "severity": "high",
+      "details": "Date \"wednesday\" not found in candidate"
+    },
+    {
+      "caseId": "ADV-003",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Missing entities: Wednesday",
+      "actual": "preservation_entity: 0",
+      "failureCategory": "preservation_entity",
+      "severity": "high",
+      "details": "Missing entities: Wednesday"
+    },
+    {
+      "caseId": "ADV-003",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Jaccard similarity 0.067 is very low",
+      "actual": "preservation_semantic: 0",
+      "failureCategory": "preservation_semantic",
+      "severity": "high",
+      "details": "Jaccard similarity 0.067 is very low"
+    },
+    {
+      "caseId": "ADV-003",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Potential fabrication: new dates: monday",
+      "actual": "preservation_fabrication: 0",
+      "failureCategory": "preservation_fabrication",
+      "severity": "critical",
+      "details": "Potential fabrication: new dates: monday"
+    },
+    {
+      "caseId": "ADV-003",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable pattern \"Monday morning\" found",
+      "actual": "unacceptable_pattern_Monday morning: 0",
+      "failureCategory": "unacceptable_pattern_Monday morning",
+      "severity": "critical",
+      "details": "Unacceptable pattern \"Monday morning\" found"
+    },
+    {
+      "caseId": "ADV-003",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable tone pattern \"Monday morning\" found",
+      "actual": "tone_unacceptable_Monday morning: 0",
+      "failureCategory": "tone_unacceptable_Monday morning",
+      "severity": "high",
+      "details": "Unacceptable tone pattern \"Monday morning\" found"
+    },
+    {
+      "caseId": "ADV-003",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"professional\" fit: 0.450 (no_contraction, no_emoji)",
+      "actual": "context_fit: 0.45",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"professional\" fit: 0.450 (no_contraction, no_emoji)"
+    },
+    {
+      "caseId": "ADV-003",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable pattern \"Monday morning\" found",
+      "actual": "pre_send_unacceptable_Monday morning: 0",
+      "failureCategory": "pre_send_unacceptable_Monday morning",
+      "severity": "high",
+      "details": "Unacceptable pattern \"Monday morning\" found"
+    },
+    {
+      "caseId": "ADV-004",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Number \"200\" not found in candidate",
+      "actual": "preservation_number: 0",
+      "failureCategory": "preservation_number",
+      "severity": "high",
+      "details": "Number \"200\" not found in candidate"
+    },
+    {
+      "caseId": "ADV-004",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Potential fabrication: new numbers: 500",
+      "actual": "preservation_fabrication: 0",
+      "failureCategory": "preservation_fabrication",
+      "severity": "critical",
+      "details": "Potential fabrication: new numbers: 500"
+    },
+    {
+      "caseId": "ADV-004",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Fact \"200 units\" missing",
+      "actual": "preservation_fact_200 units: 0",
+      "failureCategory": "preservation_fact_200 units",
+      "severity": "critical",
+      "details": "Fact \"200 units\" missing"
+    },
+    {
+      "caseId": "ADV-004",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable pattern \"500\" found",
+      "actual": "unacceptable_pattern_500: 0",
+      "failureCategory": "unacceptable_pattern_500",
+      "severity": "critical",
+      "details": "Unacceptable pattern \"500\" found"
+    },
+    {
+      "caseId": "ADV-004",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable tone pattern \"500\" found",
+      "actual": "tone_unacceptable_500: 0",
+      "failureCategory": "tone_unacceptable_500",
+      "severity": "high",
+      "details": "Unacceptable tone pattern \"500\" found"
+    },
+    {
+      "caseId": "ADV-004",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"professional\" fit: 0.450 (no_contraction, no_emoji)",
+      "actual": "context_fit: 0.45",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"professional\" fit: 0.450 (no_contraction, no_emoji)"
+    },
+    {
+      "caseId": "ADV-004",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable pattern \"500\" found",
+      "actual": "pre_send_unacceptable_500: 0",
+      "failureCategory": "pre_send_unacceptable_500",
+      "severity": "high",
+      "details": "Unacceptable pattern \"500\" found"
+    },
+    {
+      "caseId": "ADV-005",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Original has negation (not), candidate does not",
+      "actual": "preservation_negation: 0",
+      "failureCategory": "preservation_negation",
+      "severity": "critical",
+      "details": "Original has negation (not), candidate does not"
+    },
+    {
+      "caseId": "ADV-005",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Jaccard similarity 0.095 is very low",
+      "actual": "preservation_semantic: 0",
+      "failureCategory": "preservation_semantic",
+      "severity": "high",
+      "details": "Jaccard similarity 0.095 is very low"
+    },
+    {
+      "caseId": "ADV-005",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Potential fabrication: new numbers: one",
+      "actual": "preservation_fabrication: 0",
+      "failureCategory": "preservation_fabrication",
+      "severity": "critical",
+      "details": "Potential fabrication: new numbers: one"
+    },
+    {
+      "caseId": "ADV-005",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable pattern \"only seeing you\" found",
+      "actual": "unacceptable_pattern_only seeing you: 0",
+      "failureCategory": "unacceptable_pattern_only seeing you",
+      "severity": "critical",
+      "details": "Unacceptable pattern \"only seeing you\" found"
+    },
+    {
+      "caseId": "ADV-005",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable pattern \"only one\" found",
+      "actual": "unacceptable_pattern_only one: 0",
+      "failureCategory": "unacceptable_pattern_only one",
+      "severity": "critical",
+      "details": "Unacceptable pattern \"only one\" found"
+    },
+    {
+      "caseId": "ADV-005",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable tone pattern \"only seeing you\" found",
+      "actual": "tone_unacceptable_only seeing you: 0",
+      "failureCategory": "tone_unacceptable_only seeing you",
+      "severity": "high",
+      "details": "Unacceptable tone pattern \"only seeing you\" found"
+    },
+    {
+      "caseId": "ADV-005",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable tone pattern \"only one\" found",
+      "actual": "tone_unacceptable_only one: 0",
+      "failureCategory": "tone_unacceptable_only one",
+      "severity": "high",
+      "details": "Unacceptable tone pattern \"only one\" found"
+    },
+    {
+      "caseId": "ADV-005",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Context \"dating\" fit: 0.500 (has_contraction, casual_length)",
+      "actual": "context_fit: 0.5",
+      "failureCategory": "context_fit",
+      "severity": "medium",
+      "details": "Context \"dating\" fit: 0.500 (has_contraction, casual_length)"
+    },
+    {
+      "caseId": "ADV-005",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable pattern \"only seeing you\" found",
+      "actual": "pre_send_unacceptable_only seeing you: 0",
+      "failureCategory": "pre_send_unacceptable_only seeing you",
+      "severity": "high",
+      "details": "Unacceptable pattern \"only seeing you\" found"
+    },
+    {
+      "caseId": "ADV-005",
+      "category": "adversarial",
+      "difficulty": "adversarial",
+      "input": "",
+      "candidate": "",
+      "expected": "Unacceptable pattern \"only one\" found",
+      "actual": "pre_send_unacceptable_only one: 0",
+      "failureCategory": "pre_send_unacceptable_only one",
+      "severity": "high",
+      "details": "Unacceptable pattern \"only one\" found"
+    },
+    {
+      "caseId": "NEG-002",
+      "category": "negotiation",
+      "difficulty": "medium",
+      "input": "",
+      "candidate": "",
+      "expected": "Fact \"$80,000\" missing",
+      "actual": "preservation_fact_$80,000: 0",
+      "failureCategory": "preservation_fact_$80,000",
+      "severity": "critical",
+      "details": "Fact \"$80,000\" missing"
+    }
+  ],
+  "timestamp": "2026-09-07T15:01:49.731Z",
+  "executionTimeMs": 13
+}

@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "eval:smoke": "npx tsx scripts/eval.ts --mode smoke",
+    "eval:full": "npx tsx scripts/eval.ts --mode full",
+    "eval:real-world": "npx tsx scripts/eval.ts --dataset real-world-v1.0"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

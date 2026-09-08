@@ -16,6 +16,14 @@ model User {
   accounts      Account[]
   sessions      Session[]
   profile       Profile?
+  memories      ConversationMemory[]
+  relationships RelationshipContext[]
+  resolutions   ResolutionMemory[]
+  memorySettings MemorySettings?
+  communicationPreferences CommunicationPreference[]
+  feedbackEvents            FeedbackEvent[]
+  personalizationSettings   PersonalizationSettings?
+  workspaces                ConversationWorkspace[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
@@ -119,6 +127,8 @@ model Conversation {
   createdAt     DateTime           @default(now())
   updatedAt     DateTime           @updatedAt
 
+  @@index([profileId])
+  @@index([profileId, createdAt(sort: Desc)])
   @@map("conversations")
 }
 
@@ -131,7 +141,74 @@ model ConversationMessage {
   ordering       Int
   createdAt      DateTime     @default(now())
 
+  @@index([conversationId])
+  @@index([conversationId, ordering])
   @@map("conversation_messages")
+}
+
+// ─── Conversation Workspace ────────────────────────────────────────────────────
+//
+// Workspace = persistent conversation context for the Analyze experience.
+// Each workspace belongs to one user and contains participants + messages.
+// Conversation state is derived at runtime, not stored permanently.
+// ──────────────────────────────────────────────────────────────────────────────
+
+model ConversationWorkspace {
+  id             String                @id @default(cuid())
+  userId         String
+  user           User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title          String                @default("Untitled Conversation")
+  platform       String?
+  goal           String?
+  language       String?
+  version        Int                   @default(1)
+  conversationVersion Int              @default(0)
+  lastActiveAt   DateTime              @default(now())
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+  participants   WorkspaceParticipant[]
+  messages       WorkspaceMessage[]
+
+  @@index([userId])
+  @@index([lastActiveAt])
+  @@map("conversation_workspaces")
+}
+
+model WorkspaceParticipant {
+  id             String                @id @default(cuid())
+  workspaceId    String
+  workspace      ConversationWorkspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  displayName    String
+  role           String                @default("participant")
+  language       String?
+  isUser         Boolean               @default(false)
+  metadata       String?
+  messages       WorkspaceMessage[]
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+
+  @@index([workspaceId])
+  @@map("workspace_participants")
+}
+
+model WorkspaceMessage {
+  id             String                @id @default(cuid())
+  workspaceId    String
+  workspace      ConversationWorkspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  participantId  String?
+  participant    WorkspaceParticipant? @relation(fields: [participantId], references: [id], onDelete: SetNull)
+  sender         String                @default("unknown")
+  text           String
+  source         String                @default("user")
+  sequence       Int
+  metadata       String?
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+
+  @@index([workspaceId])
+  @@index([workspaceId, sequence])
+  @@index([participantId])
+  @@map("workspace_messages")
 }
 
 model GeneratedReply {
@@ -145,6 +222,7 @@ model GeneratedReply {
   feedback       ReplyFeedback[]
   createdAt      DateTime           @default(now())
 
+  @@index([conversationId])
   @@map("generated_replies")
 }
 
@@ -156,4 +234,145 @@ model ReplyFeedback {
   createdAt     DateTime      @default(now())
 
   @@map("reply_feedback")
+}
+
+// ─── Memory Models ─────────────────────────────────────────────────────────────
+//
+// Memory types:
+// A. ConversationMemory - Short-term information about conversations
+// B. RelationshipContext - High-level communication context
+// C. ResolutionMemory - Outcomes from previous difficult conversations
+//
+// Privacy: All memory is user-controlled, scoped, and deletable.
+// ──────────────────────────────────────────────────────────────────────────────
+
+model ConversationMemory {
+  id             String    @id @default(cuid())
+  userId         String
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  relationshipId String?
+  type           String    // MemoryType: conversation_topic, unresolved_issue, etc.
+  content        String
+  source         String    // MemorySource: explicit_user, user_confirmed, etc.
+  confidence     Float     @default(0.5)
+  isUserConfirmed Boolean @default(false)
+  isActive       Boolean   @default(true)
+  expiresAt      DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([relationshipId])
+  @@index([type])
+  @@index([createdAt])
+  @@index([isActive])
+  @@map("conversation_memories")
+}
+
+model RelationshipContext {
+  id                     String   @id @default(cuid())
+  userId                 String
+  user                   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  relationshipType       String
+  communicationPreferences String[]
+  recurringIssues        String[]
+  resolvedIssues         String[]
+  activeIssues           String[]
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  @@unique([userId, relationshipType])
+  @@index([userId])
+  @@map("relationship_contexts")
+}
+
+model ResolutionMemory {
+  id                     String    @id @default(cuid())
+  userId                 String
+  user                   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  relationshipId         String?
+  conflictCause          String
+  resolution             String
+  communicationPreference String?
+  unresolvedFollowup     String?
+  boundaryEstablished    String?
+  confidence             Float     @default(0.5)
+  expiresAt              DateTime?
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([relationshipId])
+  @@index([createdAt])
+  @@map("resolution_memories")
+}
+
+model MemorySettings {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  memoryEnabled Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("memory_settings")
+}
+
+// ─── Personalization Models ────────────────────────────────────────────────────
+//
+// Stores learned communication preferences from user feedback.
+// - CommunicationPreference: A single learned preference (e.g., "formality": "casual")
+// - FeedbackEvent: Tracks individual feedback signals for learning
+//
+// Privacy: All data is user-controlled, scoped, and deletable.
+// Personalization NEVER fabricates traits — it only learns from explicit signals.
+// ──────────────────────────────────────────────────────────────────────────────
+
+model CommunicationPreference {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  dimension     String   // Preference dimension: length, emoji, formality, tone, etc.
+  value         String   // Learned value: "casual", "short", "none", etc.
+  confidence    Float    @default(0.5)  // 0.0-1.0 confidence in this preference
+  source        String   @default("implicit")  // "explicit" | "implicit"
+  context       String?  // Optional context scope: "professional", "dating", etc.
+  signalCount   Int      @default(1)   // Number of signals that contributed
+  lastSignalAt  DateTime @default(now())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([userId, dimension, context])
+  @@index([userId])
+  @@index([dimension])
+  @@map("communication_preferences")
+}
+
+model FeedbackEvent {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  replyId       String?  // Optional: link to GeneratedReply
+  signal        String   // "thumbs_up" | "thumbs_down" | "copy" | "select" | "edit" | "regenerate" | "discard"
+  context       String?  // Optional context: "professional", "dating", etc.
+  strategy      String?  // Strategy of the reply that received feedback
+  metadata      String?  // JSON string with additional signal data
+  createdAt     DateTime @default(now())
+
+  @@index([userId])
+  @@index([signal])
+  @@index([createdAt])
+  @@map("feedback_events")
+}
+
+model PersonalizationSettings {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  enabled       Boolean  @default(true)  // Master toggle for personalization
+  learningEnabled Boolean @default(true) // Whether to learn from feedback
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("personalization_settings")
 }

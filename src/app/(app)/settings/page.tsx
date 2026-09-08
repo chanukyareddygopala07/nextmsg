@@ -1,13 +1,16 @@
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
+import PersonalizationSettings from "@/components/analyze/PersonalizationSettings";
 
 export default function SettingsPage() {
   return (
     <div className="p-6 md:p-10 max-w-3xl mx-auto space-y-8">
       <div>
         <h1 className="text-3xl font-bold text-white mb-2">Settings</h1>
-        <p className="text-white/40">Manage your account and privacy.</p>
+        <p className="text-white/40">Manage your account, privacy, and personalization.</p>
       </div>
+
+      <PersonalizationSettings />
 
       <div className="space-y-6">
         <div>

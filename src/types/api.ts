@@ -4,12 +4,23 @@ export interface ApiResponse<T = unknown> {
   error?: string;
 }
 
-export interface GenerateRepliesRequest {
-  conversationId?: string;
-  messages: { sender: string; text: string }[];
+export interface ConversationContextRequest {
+  language?: string;
+  script?: string;
+  conversationType?: string;
+  participants?: number;
   goal?: string;
-  styleProfile?: Record<string, string>;
+  tone?: string;
+  urgency?: string;
+  userStyle?: string;
   platform?: string;
+  outputLanguage?: string;
+  preferredStyle?: string;
+}
+
+export interface GenerateRepliesRequest {
+  messages: { sender: string; text: string }[];
+  context?: ConversationContextRequest;
 }
 
 export interface GenerateRepliesResponse {
@@ -30,6 +41,7 @@ export interface AnalyzeScreenshotRequest {
 export interface AnalyzeScreenshotResponse {
   platform?: string;
   messages: { sender: string; text: string }[];
+  context?: ConversationContextRequest;
 }
 
 export interface AnalyzeTextRequest {

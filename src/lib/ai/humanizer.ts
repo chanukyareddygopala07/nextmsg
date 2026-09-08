@@ -1,74 +1,164 @@
 import type { AIProvider } from "./provider";
+import type { ConversationContext } from "./context";
+import type { ConversationState } from "./conversation-state";
+import {
+  assembleSystemPrompt,
+  assembleContextAwareHumanizationPrompt,
+} from "./prompt-builder";
+import { CONTEXT_AWARE_HUMANIZATION_PROMPT } from "./prompts/system";
+import { HumanizationSchema } from "./schemas";
+import { createPipelineError, logPipelineError, type PipelineError } from "./errors";
 
-const HUMANIZATION_SYSTEM_PROMPT = `You are a humanization engine. Your job is to take AI-generated replies and make them sound like a REAL PERSON texting.
+export interface HumanizationResult {
+  humanized: { text: string; strategy: string }[];
+  error?: PipelineError;
+}
 
-You will receive a list of candidate replies. For each one, rewrite it to be more natural and human-like.
-
-Rules:
-- REMOVE all AI-like patterns: "That sounds amazing!", "That's really interesting!", "I'd love to hear more"
-- USE contractions (don't, can't, won't, it's)
-- Use sentence fragments, not full sentences
-- Match casual texting conventions
-- Keep messages SHORT (1-2 lines max)
-- Use natural emoji placement (not excessive)
-- Avoid overly clever or polished wording
-- Avoid unnecessary punctuation (!!!, ...)
-- Use lowercase when appropriate
-- Use slang only if it fits the context naturally
-- DO NOT add generic compliments
-- DO NOT make it sound like a dating coach wrote it
-- Preserve the conversational strategy/intent of each candidate
-
-Return ONLY valid JSON:
-{
-  "humanized": [
-    { "text": "rewritten text", "strategy": "original strategy" }
-  ]
-}`;
+const HUMANIZATION_OUTPUT_CONFIG = {
+  name: "humanization",
+  schema: {
+    type: "object",
+    properties: {
+      humanized: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            text: { type: "string" },
+            strategy: { type: "string" },
+          },
+          required: ["text", "strategy"],
+          additionalProperties: false,
+        },
+        minItems: 1,
+      },
+    },
+    required: ["humanized"],
+    additionalProperties: false,
+  },
+};
 
 export async function humanizeReplies(
   provider: AIProvider,
   candidates: { text: string; strategy: string }[],
-  userStyle?: Record<string, string>
-): Promise<{ text: string; strategy: string }[]> {
+  context: ConversationContext,
+  state?: ConversationState
+): Promise<HumanizationResult> {
+  // If no state provided, use basic context-aware humanization
+  if (!state) {
+    return humanizeWithBasicContext(provider, candidates, context);
+  }
+
+  return humanizeWithContextState(provider, candidates, context, state);
+}
+
+async function humanizeWithBasicContext(
+  provider: AIProvider,
+  candidates: { text: string; strategy: string }[],
+  context: ConversationContext
+): Promise<HumanizationResult> {
   const candidatesText = candidates
     .map((c, i) => `${i + 1}. [${c.strategy}] ${c.text}`)
     .join("\n");
 
-  const styleContext = userStyle
-    ? `\nUser texting style: ${Object.entries(userStyle)
-        .map(([k, v]) => `${k}=${v}`)
-        .join(", ")}`
-    : "";
+  const systemPrompt = assembleSystemPrompt(CONTEXT_AWARE_HUMANIZATION_PROMPT, context);
+  const userPrompt = assembleContextAwareHumanizationPrompt(candidatesText, context);
 
-  const response = await provider.chat(
-    [
-      { role: "system", content: HUMANIZATION_SYSTEM_PROMPT },
-      {
-        role: "user",
-        content: `Humanize these replies to sound like a real person texting:${styleContext}\n\n${candidatesText}`,
-      },
-    ],
-    { temperature: 0.8, maxTokens: 1024 }
+  try {
+    const response = await provider.chatStructured(
+      [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userPrompt },
+      ],
+      HUMANIZATION_OUTPUT_CONFIG,
+      { temperature: 0.8, maxTokens: 1024 }
+    );
+
+    const parsed = JSON.parse(response);
+    const result = HumanizationSchema.safeParse(parsed);
+
+    if (result.success) {
+      return { humanized: result.data.humanized };
+    }
+
+    const error = createPipelineError("schema_validation", result.error, {
+      schemaName: "humanization",
+    });
+    logPipelineError(error);
+
+    return {
+      humanized: candidates,
+      error,
+    };
+  } catch (err) {
+    const error = createPipelineError("humanization", err);
+    logPipelineError(error);
+
+    return {
+      humanized: candidates,
+      error,
+    };
+  }
+}
+
+async function humanizeWithContextState(
+  provider: AIProvider,
+  candidates: { text: string; strategy: string }[],
+  context: ConversationContext,
+  state: ConversationState
+): Promise<HumanizationResult> {
+  const candidatesText = candidates
+    .map((c, i) => `${i + 1}. [${c.strategy}] ${c.text}`)
+    .join("\n");
+
+  const systemPrompt = assembleSystemPrompt(CONTEXT_AWARE_HUMANIZATION_PROMPT, context);
+  const userPrompt = assembleContextAwareHumanizationPrompt(
+    candidatesText,
+    context,
+    state
   );
 
   try {
-    const jsonMatch = response.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) {
-      return candidates;
+    const response = await provider.chatStructured(
+      [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userPrompt },
+      ],
+      HUMANIZATION_OUTPUT_CONFIG,
+      { temperature: 0.8, maxTokens: 1024 }
+    );
+
+    const parsed = JSON.parse(response);
+    const result = HumanizationSchema.safeParse(parsed);
+
+    if (result.success) {
+      return { humanized: result.data.humanized };
     }
-    const parsed = JSON.parse(jsonMatch[0]);
-    if (Array.isArray(parsed.humanized) && parsed.humanized.length > 0) {
-      return parsed.humanized.map((h: { text: string; strategy: string }) => ({
-        text: h.text || "",
-        strategy: h.strategy || "natural",
-      }));
-    }
-    return candidates;
-  } catch {
-    return candidates;
+
+    const error = createPipelineError("schema_validation", result.error, {
+      schemaName: "humanization",
+    });
+    logPipelineError(error);
+
+    return {
+      humanized: candidates,
+      error,
+    };
+  } catch (err) {
+    const error = createPipelineError("humanization", err);
+    logPipelineError(error);
+
+    return {
+      humanized: candidates,
+      error,
+    };
   }
 }
+
+// ─── AI Likeness Scoring ─────────────────────────────────────────────────────
+//
+// Used by the ranker to penalize AI-like responses.
+// ──────────────────────────────────────────────────────────────────────────────
 
 const AI_LIKENESS_PATTERNS = [
   /that sounds (amazing|wonderful|fantastic|great|interesting|fascinating)/i,

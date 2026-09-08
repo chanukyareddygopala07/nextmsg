@@ -1,60 +1,103 @@
 import type { AIProvider } from "./provider";
-import type { ConversationAnalysis, ConversationStage } from "@/types/conversation";
+import type { ConversationAnalysis } from "@/types/conversation";
+import type { ConversationContext } from "./context";
+import {
+  buildConversationText,
+  assembleSystemPrompt,
+  assembleAnalysisUserPrompt,
+} from "./prompt-builder";
+import { CONVERSATION_ANALYSIS_PROMPT } from "./prompts/system";
+import { ConversationAnalysisSchema } from "./schemas";
+import { createPipelineError, logPipelineError, type PipelineError } from "./errors";
 
-const ANALYSIS_SYSTEM_PROMPT = `You are a conversation analyst. Analyze the provided conversation and return a JSON object with the following fields:
-
-{
-  "stage": one of "opening", "getting_to_know_each_other", "rapport", "playful", "flirting", "deep_conversation", "planning", "reconnecting", "dry_conversation", "awkward_conversation", "closing",
-  "engagement": 0.0 to 1.0,
-  "flirting": 0.0 to 1.0,
-  "humor": 0.0 to 1.0,
-  "reciprocity": 0.0 to 1.0,
-  "conversationHealth": 0.0 to 1.0
+export interface AnalysisResult {
+  analysis: ConversationAnalysis;
+  error?: PipelineError;
 }
 
-Analyze:
-- Message length and frequency patterns
-- Question balance and reciprocity
-- Emoji and humor usage
-- Emotional energy and tone
-- Signs of engagement or disinterest
-- Current conversation stage
-- Overall conversation health
-
-Return ONLY valid JSON. No explanation.`;
+const CONVERSATION_ANALYSIS_OUTPUT_CONFIG = {
+  name: "conversation_analysis",
+  schema: {
+    type: "object",
+    properties: {
+      stage: {
+        type: "string",
+        enum: [
+          "opening",
+          "getting_to_know_each_other",
+          "rapport",
+          "playful",
+          "flirting",
+          "deep_conversation",
+          "planning",
+          "reconnecting",
+          "dry_conversation",
+          "awkward_conversation",
+          "closing",
+        ],
+      },
+      engagement: { type: "number" },
+      flirting: { type: "number" },
+      humor: { type: "number" },
+      reciprocity: { type: "number" },
+      conversationHealth: { type: "number" },
+    },
+    required: [
+      "stage",
+      "engagement",
+      "flirting",
+      "humor",
+      "reciprocity",
+      "conversationHealth",
+    ],
+    additionalProperties: false,
+  },
+};
 
 export async function analyzeConversation(
   provider: AIProvider,
-  messages: { sender: string; text: string }[]
-): Promise<ConversationAnalysis> {
-  const conversationText = messages
-    .map((m) => `${m.sender}: ${m.text}`)
-    .join("\n");
+  messages: { sender: string; text: string }[],
+  context: ConversationContext
+): Promise<AnalysisResult> {
+  const conversationText = buildConversationText(messages);
 
-  const response = await provider.chat(
-    [
-      { role: "system", content: ANALYSIS_SYSTEM_PROMPT },
-      { role: "user", content: `Analyze this conversation:\n\n${conversationText}` },
-    ],
-    { temperature: 0.3, maxTokens: 512 }
-  );
+  const systemPrompt = assembleSystemPrompt(CONVERSATION_ANALYSIS_PROMPT, context);
+  const userPrompt = assembleAnalysisUserPrompt(conversationText, context);
 
   try {
-    const jsonMatch = response.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) {
-      return getDefaultAnalysis();
+    const response = await provider.chatStructured(
+      [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userPrompt },
+      ],
+      CONVERSATION_ANALYSIS_OUTPUT_CONFIG,
+      { temperature: 0.3, maxTokens: 512 }
+    );
+
+    const parsed = JSON.parse(response);
+    const result = ConversationAnalysisSchema.safeParse(parsed);
+
+    if (result.success) {
+      return { analysis: result.data };
     }
-    const parsed = JSON.parse(jsonMatch[0]);
+
+    const error = createPipelineError("schema_validation", result.error, {
+      schemaName: "conversation_analysis",
+    });
+    logPipelineError(error);
+
     return {
-      stage: validateStage(parsed.stage),
-      engagement: clamp(parsed.engagement),
-      flirting: clamp(parsed.flirting),
-      humor: clamp(parsed.humor),
-      reciprocity: clamp(parsed.reciprocity),
-      conversationHealth: clamp(parsed.conversationHealth),
+      analysis: getDefaultAnalysis(),
+      error,
     };
-  } catch {
-    return getDefaultAnalysis();
+  } catch (err) {
+    const error = createPipelineError("conversation_analysis", err);
+    logPipelineError(error);
+
+    return {
+      analysis: getDefaultAnalysis(),
+      error,
+    };
   }
 }
 
@@ -67,28 +110,4 @@ function getDefaultAnalysis(): ConversationAnalysis {
     reciprocity: 0.5,
     conversationHealth: 0.5,
   };
-}
-
-function validateStage(stage: string): ConversationStage {
-  const valid: ConversationStage[] = [
-    "opening",
-    "getting_to_know_each_other",
-    "rapport",
-    "playful",
-    "flirting",
-    "deep_conversation",
-    "planning",
-    "reconnecting",
-    "dry_conversation",
-    "awkward_conversation",
-    "closing",
-  ];
-  return valid.includes(stage as ConversationStage)
-    ? (stage as ConversationStage)
-    : "getting_to_know_each_other";
-}
-
-function clamp(value: unknown): number {
-  const num = typeof value === "number" ? value : 0.5;
-  return Math.max(0, Math.min(1, num));
 }
