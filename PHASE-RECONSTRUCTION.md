@@ -148,7 +148,54 @@ Deep conversation understanding — resolving conversation state, selecting comm
 
 ---
 
-<!-- Phase 3 section will be added in next commit -->
+## Phase 3 — Personalization & Memory
+
+**Purpose:**
+Learn and apply the user's communication preferences across conversations. Extract and persist conversation memories. Build preference profiles from feedback. Resolve effective preferences with precedence logic.
+
+**Major Functionality:**
+- Personalization engine with signal processing, confidence scoring, and decay
+- Communication preference dimensions (tone, length, formality, emoji use, etc.)
+- Preference resolver with precedence logic and system defaults
+- Effective preferences computation
+- Memory extraction from conversations (facts, patterns, preferences)
+- Memory persistence with Prisma database service
+- Memory relevance scoring and retrieval
+- Feedback learning from user actions (accept/reject/edit)
+- Compact preference profile for prompt injection
+- Safety constraints — rejected candidates do not influence learning
+
+**Representative Files:**
+- `src/lib/ai/personalization.ts` (557 lines) — Personalization Engine, signal processing, confidence, decay
+- `src/lib/ai/personalization-types.ts` (234 lines) — SIGNAL_WEIGHTS, SIGNAL_DIRECTION, DECAY_RATES, DIMENSION_VALUES
+- `src/lib/ai/preference-resolver.ts` (232 lines) — Preference resolution with precedence logic
+- `src/lib/ai/effective-preferences.ts` (399 lines) — Effective preferences computation
+- `src/lib/ai/memory-extractor.ts` (497 lines) — Memory extraction from conversations
+- `src/lib/ai/memory-service.ts` (666 lines) — Memory persistence with Prisma
+- `src/lib/ai/memory-types.ts` (401 lines) — MemoryRecord, MemoryType, MemorySource, MemoryConfig
+- `src/components/analyze/PersonalizationSettings.tsx` — Personalization settings UI
+- `src/components/analyze/PreferenceChips.tsx` — Preference display chips
+- `src/components/analyze/MemoryList.tsx` — Memory list display
+- `src/components/analyze/MemorySettings.tsx` — Memory settings UI
+- `src/components/analyze/MemoryTransparency.tsx` — Memory transparency display
+- `src/components/analyze/FeedbackWidget.tsx` — Feedback collection widget
+- `src/app/api/preferences/route.ts` — Preferences endpoint
+- `src/app/api/preferences/feedback/route.ts` — Feedback endpoint
+- `src/app/api/preferences/learned/route.ts` — Learned preferences endpoint
+- `src/app/api/memory/route.ts` — Memory endpoint
+- `tests/api/personalization.test.ts` (956 lines) — Personalization system tests
+- `tests/api/memory-extraction.test.ts` (661 lines) — Memory extraction tests
+- `tests/api/memory-security.test.ts` (685 lines) — Memory security tests
+
+**Evidence:**
+- All files first added in `cee28bd` (confirmed by `git log --all --diff-filter=A`)
+- `personalization.ts` header: "Core engine for learning and applying communication preferences. Invariant: Personalization changes preference, NOT truth."
+- `phase6-step7-cross-layer.test.ts` imports `inferDimensionsFromReply` from `personalization`, confirming it existed before Phase 6
+- `personalization.test.ts` tests SIGNAL_WEIGHTS, DECAY_RATES, confidence updates, safety checks — all matching the personalization-types.ts constants
+
+**Confidence:** HIGH — code comments, test coverage, and report evidence align
+
+---
 
 <!-- Phase 4 section will be added in next commit -->
 
