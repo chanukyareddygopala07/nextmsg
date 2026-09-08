@@ -278,3 +278,30 @@ durationMs:>5000
 3. Check database connection pool
 4. Consider temporarily increasing rate limits
 5. Monitor recovery
+
+## Monitoring & Alerting
+
+### Uptime Monitor
+```bash
+# Check health endpoint
+node scripts/uptime-monitor.js
+
+# With Slack alerts
+SLACK_WEBHOOK_URL=https://hooks.slack.com/... node scripts/uptime-monitor.js
+```
+
+### Load Testing
+```bash
+# Health endpoint load test (safe, no AI calls)
+node scripts/load-test.js --duration 30 --concurrency 5 --endpoint /api/health
+
+# Login page load test
+node scripts/load-test.js --duration 10 --concurrency 3 --endpoint /login
+```
+
+### External Monitoring Setup (Manual)
+1. Create free account at https://uptimerobot.com or https://betterstack.com
+2. Add HTTP monitor for: `https://nextmsg-two.vercel.app/api/health`
+3. Set check interval: 5 minutes
+4. Configure alert contacts (email, Slack, SMS)
+5. Expected response: `{"status":"ok","database":{"status":"connected"}}`

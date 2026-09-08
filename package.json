@@ -11,7 +11,9 @@
     "test:watch": "vitest",
     "eval:smoke": "npx tsx scripts/eval.ts --mode smoke",
     "eval:full": "npx tsx scripts/eval.ts --mode full",
-    "eval:real-world": "npx tsx scripts/eval.ts --dataset real-world-v1.0"
+    "eval:real-world": "npx tsx scripts/eval.ts --dataset real-world-v1.0",
+    "monitor": "node scripts/uptime-monitor.js",
+    "load-test": "node scripts/load-test.js"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
